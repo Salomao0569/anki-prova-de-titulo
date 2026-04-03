@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="mobile-web-app-capable" content="yes"/>
 <meta name="theme-color" content="#141412"/>
 <title>FlashMind — Anki DIC</title>
 <style>
@@ -123,7 +123,7 @@ body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f5f5f
 
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import{getAuth,signInWithPopup,GoogleAuthProvider,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import{getAuth,signInWithRedirect,getRedirectResult,GoogleAuthProvider,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import{getFirestore,doc,setDoc,getDoc,collection,getDocs}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const fbApp=initializeApp({
@@ -242,9 +242,7 @@ function showLogin(){
         Entrar com Google
       </button>
     </div>`;
-  document.getElementById('gLogin').onclick=async()=>{
-    try{await signInWithPopup(auth,new GoogleAuthProvider());}catch(e){console.error(e);}
-  };
+  document.getElementById('gLogin').onclick=()=>{signInWithRedirect(auth,new GoogleAuthProvider());};
 }
 
 onAuthStateChanged(auth,(user)=>{
@@ -252,24 +250,23 @@ onAuthStateChanged(auth,(user)=>{
   if(user){resetGame();}else{showLogin();}
 });
 
-// ── AI AGENT SWARM ──
-async function callAgents(){
+// ── AI EXPLAIN ──
+async function callExplain(){
   const card=cc();
   aiLoading=true;aiResult=null;render();
   const wasCorrect=mode==='flip'?true:(sel===card.correct);
   const userAns=mode==='quiz'&&sel!==null?card.options[sel]:card.answer;
-  const optMap={};
-  ['A','B','C','D'].forEach((l,i)=>{optMap[l]=card.options[i];});
   try{
     const res=await fetch(FN_URL,{
       method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({question:card.question,userAnswer:userAns,correctAnswer:card.answer,detail:card.detail,wasCorrect,options:optMap})
+      body:JSON.stringify({question:card.question,userAnswer:userAns,correctAnswer:card.answer,detail:card.detail,wasCorrect})
     });
     if(!res.ok)throw new Error('HTTP '+res.status);
-    aiResult=await res.json();
+    const data=await res.json();
+    aiResult=data.explanation;
   }catch(e){
     console.error(e);
-    aiResult={explicacao:'Erro ao conectar com a IA. Tente novamente.',aprofundamento:'',mnemonico:''};
+    aiResult='Erro ao conectar com a IA. Tente novamente.';
   }
   aiLoading=false;render();
 }
@@ -348,30 +345,22 @@ function renderQuiz($,card){
 }
 
 function addAI($){
-  const sec=document.createElement('div');sec.className='ai-section';
-
   if(aiLoading){
-    sec.innerHTML=`<div class="ai-loading"><span class="dots">&#9889; Agentes analisando a questao...</span></div>`;
-    $.appendChild(sec);return;
+    const ld=document.createElement('div');ld.className='ai-loading';
+    ld.innerHTML='<span class="dots">&#9889; Gerando explicacao...</span>';
+    $.appendChild(ld);return;
   }
 
   if(aiResult){
-    if(aiResult.explicacao){
-      sec.innerHTML+=`<div class="ai-card"><div class="ai-card-title t-exp">&#128218; Explicador</div><div class="ai-card-body">${aiResult.explicacao}</div></div>`;
-    }
-    if(aiResult.aprofundamento){
-      sec.innerHTML+=`<div class="ai-card"><div class="ai-card-title t-deep">&#127793; Aprofundamento</div><div class="ai-card-body">${aiResult.aprofundamento}</div></div>`;
-    }
-    if(aiResult.mnemonico){
-      sec.innerHTML+=`<div class="ai-card"><div class="ai-card-title t-mnem">&#129504; Mnemonico</div><div class="ai-card-body">${aiResult.mnemonico}</div></div>`;
-    }
-    $.appendChild(sec);
+    const box=document.createElement('div');box.className='ai-card';
+    box.innerHTML=`<div class="ai-card-title t-exp">&#9889; Explicacao IA</div><div class="ai-card-body">${aiResult}</div>`;
+    $.appendChild(box);
     const rb=document.createElement('button');rb.className='explain-btn';rb.textContent='Perguntar de novo';
-    rb.onclick=callAgents;$.appendChild(rb);
+    rb.onclick=callExplain;$.appendChild(rb);
   }else{
     const eb=document.createElement('button');eb.className='explain-btn';
-    eb.innerHTML='&#9889; Explicar com IA (3 agentes)';
-    eb.onclick=callAgents;$.appendChild(eb);
+    eb.innerHTML='&#9889; Explicar com IA';
+    eb.onclick=callExplain;$.appendChild(eb);
   }
 }
 
