@@ -9,7 +9,6 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f5f5f3;color:#1a1a1a;min-height:100dvh;padding:0;-webkit-tap-highlight-color:transparent;}
-
 :root{
   --bg1:#ffffff;--bg2:#f0efe9;--bg3:#e8e7e2;
   --tx1:#1a1a1a;--tx2:#6b6b68;--tx3:#9b9b98;
@@ -29,19 +28,29 @@ body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f5f5f
   }
   body{background:#141412;color:#f0efe9;}
 }
-
 .app{max-width:600px;margin:0 auto;padding:1rem 1rem 2rem;min-height:100dvh;}
-.hdr{display:flex;align-items:center;justify-content:space-between;padding:.75rem 0;margin-bottom:.5rem;}
+
+/* Login */
+.login-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:80dvh;text-align:center;padding:2rem;}
+.login-logo{font-size:42px;margin-bottom:.5rem;}
+.login-title{font-size:22px;font-weight:700;margin-bottom:.25rem;color:var(--tx1);}
+.login-sub{font-size:13px;color:var(--tx2);margin-bottom:2rem;line-height:1.5;}
+.login-btn{display:flex;align-items:center;gap:10px;padding:.7rem 1.5rem;border-radius:var(--r);border:.5px solid var(--bd2);background:var(--bg1);font-size:14px;font-weight:600;color:var(--tx1);cursor:pointer;font-family:inherit;transition:box-shadow .15s;}
+.login-btn:active{box-shadow:0 0 0 2px var(--blue);}
+.login-btn svg{width:20px;height:20px;}
+.user-bar{display:flex;align-items:center;gap:8px;padding:.4rem .6rem;border-radius:99px;background:var(--bg2);margin-bottom:.5rem;font-size:11px;color:var(--tx2);}
+.user-bar img{width:22px;height:22px;border-radius:50%;}
+.user-bar button{margin-left:auto;background:none;border:none;color:var(--tx3);font-size:10px;cursor:pointer;font-family:inherit;}
+
+/* Header */
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:.5rem 0;margin-bottom:.5rem;}
 .hdr-title{font-size:13px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:.06em;}
 .hdr-title span{color:var(--green);margin-right:4px;}
 .streak-pill{display:flex;align-items:center;gap:4px;background:var(--bg2);border-radius:99px;padding:4px 10px;font-size:12px;font-weight:600;color:var(--amber);}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:.75rem;}
 .st{background:var(--bg2);border-radius:var(--r);padding:.5rem .4rem;text-align:center;}
-.st-n{font-size:17px;font-weight:600;}
-.st-l{font-size:9px;color:var(--tx3);margin-top:1px;text-transform:uppercase;letter-spacing:.04em;}
-.st-ok .st-n{color:var(--green);}
-.st-err .st-n{color:var(--red);}
-.st-str .st-n{color:var(--amber);}
+.st-n{font-size:17px;font-weight:600;}.st-l{font-size:9px;color:var(--tx3);margin-top:1px;text-transform:uppercase;letter-spacing:.04em;}
+.st-ok .st-n{color:var(--green);}.st-err .st-n{color:var(--red);}.st-str .st-n{color:var(--amber);}
 .pb-w{height:4px;background:var(--bg2);border-radius:99px;margin-bottom:.75rem;overflow:hidden;}
 .pb{height:100%;border-radius:99px;transition:width .4s;background:linear-gradient(90deg,var(--green),#5DCAA5);}
 .meta{display:flex;align-items:center;gap:5px;margin-bottom:.65rem;}
@@ -50,6 +59,8 @@ body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f5f5f
 .diff{font-size:10px;font-weight:600;}
 .diff.easy{color:var(--green);}.diff.medium{color:var(--amber);}.diff.hard{color:var(--red);}
 .mode-pill{margin-left:auto;font-size:9px;padding:2px 8px;border-radius:99px;border:.5px solid var(--bd2);color:var(--tx3);text-transform:uppercase;letter-spacing:.04em;}
+
+/* Card */
 .card{border-radius:var(--rl);border:.5px solid var(--bd1);background:var(--bg1);padding:1.1rem;margin-bottom:.65rem;cursor:pointer;transition:box-shadow .15s;}
 .card:active{box-shadow:0 0 0 2px var(--green);}
 .tag{font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem;}
@@ -60,6 +71,8 @@ body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f5f5f
 .detail{font-size:11.5px;color:var(--tx2);margin-top:.5rem;padding-top:.5rem;border-top:.5px solid var(--bd1);line-height:1.55;}
 .diag{margin:.5rem 0;border-radius:var(--r);background:var(--bg2);padding:.6rem;overflow:hidden;}
 .diag svg{display:block;width:100%;height:auto;}
+
+/* Options */
 .opts{display:flex;flex-direction:column;gap:6px;margin-bottom:.65rem;}
 .opt{width:100%;text-align:left;padding:.6rem .8rem;border-radius:var(--r);border:.5px solid var(--bd2);background:var(--bg1);font-size:12.5px;color:var(--tx1);cursor:pointer;line-height:1.4;transition:background .1s;font-family:inherit;}
 .opt:active:not(:disabled){background:var(--bg2);}
@@ -68,22 +81,37 @@ body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f5f5f
 .opt:disabled{cursor:default;}
 .ol{font-weight:600;margin-right:6px;color:var(--tx3);}
 .opt.ok .ol{color:var(--green);}.opt.wrong .ol{color:var(--red);}
+
+/* Feedback */
 .fb{border-radius:var(--r);padding:.6rem .8rem;font-size:11.5px;line-height:1.5;margin-bottom:.65rem;}
 .fb-ok{background:var(--green-bg);color:var(--green-tx);border:.5px solid rgba(29,158,117,.3);}
 .fb-err{background:var(--red-bg);color:var(--red-tx);border:.5px solid rgba(216,90,48,.3);}
 .fb b{display:block;margin-bottom:2px;}
-.explain-btn{width:100%;padding:.55rem;border-radius:var(--r);border:.5px solid var(--purple);background:transparent;color:var(--purple);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;margin-bottom:.65rem;transition:background .12s;}
+
+/* AI Agents */
+.ai-section{margin-bottom:.65rem;}
+.explain-btn{width:100%;padding:.6rem;border-radius:var(--r);border:.5px solid var(--purple);background:transparent;color:var(--purple);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;margin-bottom:.65rem;transition:background .12s;display:flex;align-items:center;justify-content:center;gap:6px;}
 .explain-btn:active{background:rgba(83,74,183,.1);}
 .explain-btn:disabled{opacity:.6;cursor:wait;}
-.explain-box{border-radius:var(--r);padding:.75rem;background:var(--bg2);border:.5px solid var(--bd1);font-size:12px;color:var(--tx1);line-height:1.6;margin-bottom:.65rem;white-space:pre-wrap;}
+.ai-card{border-radius:var(--r);padding:.7rem;background:var(--bg2);border:.5px solid var(--bd1);margin-bottom:.5rem;font-size:12px;color:var(--tx1);line-height:1.6;}
+.ai-card-title{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.35rem;display:flex;align-items:center;gap:5px;}
+.ai-card-title.t-exp{color:var(--blue);}
+.ai-card-title.t-deep{color:var(--green);}
+.ai-card-title.t-mnem{color:var(--purple);}
+.ai-card-body{white-space:pre-wrap;}
+.ai-loading{text-align:center;padding:.8rem;color:var(--tx3);font-size:12px;}
+.ai-loading .dots{display:inline-block;animation:pulse 1.2s infinite;}
+@keyframes pulse{0%,100%{opacity:.3;}50%{opacity:1;}}
+
+/* Actions */
 .acts{display:flex;gap:7px;}
 .btn{flex:1;padding:.55rem .8rem;border-radius:var(--r);border:.5px solid var(--bd2);background:transparent;font-size:12.5px;color:var(--tx1);cursor:pointer;font-weight:600;font-family:inherit;transition:background .12s;}
 .btn:active{background:var(--bg2);}
 .btn-p{background:var(--tx1);color:var(--bg1);border-color:var(--tx1);}
-.btn-ok{border-color:var(--green);color:var(--green);}
-.btn-ok:active{background:var(--green-bg);}
-.btn-err{border-color:var(--red);color:var(--red);}
-.btn-err:active{background:var(--red-bg);}
+.btn-ok{border-color:var(--green);color:var(--green);}.btn-ok:active{background:var(--green-bg);}
+.btn-err{border-color:var(--red);color:var(--red);}.btn-err:active{background:var(--red-bg);}
+
+/* Done */
 .done{text-align:center;padding:2.5rem .5rem;}
 .done-icon{font-size:48px;margin-bottom:.75rem;}
 .done-t{font-size:19px;font-weight:600;margin-bottom:.3rem;}
@@ -91,15 +119,29 @@ body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f5f5f
 </style>
 </head>
 <body>
-<div class="app" id="app"></div>
+<div class="app" id="app"><div class="login-screen"><div class="login-logo">&#9889;</div><div class="login-title">FlashMind</div><div class="login-sub">Carregando...</div></div></div>
 
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import{getFirestore,doc,setDoc}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import{getAuth,signInWithPopup,GoogleAuthProvider,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import{getFirestore,doc,setDoc,getDoc,collection,getDocs}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-const fbApp=initializeApp({projectId:"flashmind-anki-ai",appId:"1:368064037355:web:0fefa2220d3a0037a659ae",apiKey:"AIzaSyDbfs7k7vcaaI-qCXRzY2RSo3IJcUspM1A",authDomain:"flashmind-anki-ai.firebaseapp.com",storageBucket:"flashmind-anki-ai.firebasestorage.app",messagingSenderId:"368064037355"});
+const fbApp=initializeApp({
+  projectId:"flashmind-anki-ai",
+  appId:"1:368064037355:web:0fefa2220d3a0037a659ae",
+  apiKey:"AIzaSyDbfs7k7vcaaI-qCXRzY2RSo3IJcUspM1A",
+  authDomain:"flashmind-anki-ai.firebaseapp.com",
+  storageBucket:"flashmind-anki-ai.firebasestorage.app",
+  messagingSenderId:"368064037355"
+});
+const auth=getAuth(fbApp);
 const db=getFirestore(fbApp);
+let currentUser=null;
 
+// ── FUNCTION URL ──
+const FN_URL="https://southamerica-east1-flashmind-anki-ai.cloudfunctions.net/explainQuestion";
+
+// ── CARDS ──
 const CARDS=[
   {id:1,tag:"Valvula tricuspide — cortes 2D",diff:"hard",
    question:"Em quais cortes a cuspide POSTERIOR da tricuspide e visualizada?",
@@ -163,6 +205,7 @@ const CARDS=[
    options:["Remanescente embriologico na borda da VCI","Membrana fenestrada associada a FOP","Proeminencia fibromuscular em C no AD da VCS ate VCI","Musculo papilar acessorio do VD"],correct:2}
 ];
 
+// ── SVG DIAGRAMS ──
 const DG={
   tricuspide:(w,h)=>`<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><ellipse cx="${w/2}" cy="${h/2}" rx="${w*.38}" ry="${h*.38}" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1.5"/><text x="${w/2}" y="${h*.18}" text-anchor="middle" font-size="10" fill="var(--green)" font-weight="500">Valvula Tricuspide</text><circle cx="${w*.32}" cy="${h*.38}" r="5" fill="var(--green)"/><text x="${w*.18}" y="${h*.34}" font-size="9" fill="var(--green-tx)">Anterior</text><circle cx="${w*.68}" cy="${h*.38}" r="5" fill="var(--amber)"/><text x="${w*.7}" y="${h*.34}" font-size="9" fill="var(--amber)">Posterior</text><circle cx="${w*.5}" cy="${h*.72}" r="5" fill="var(--purple)"/><text x="${w*.42}" y="${h*.85}" font-size="9" fill="var(--purple)">Septal</text><line x1="${w*.32}" y1="${h*.38}" x2="${w*.5}" y2="${h*.72}" stroke="var(--bd2)" stroke-width=".8"/><line x1="${w*.68}" y1="${h*.38}" x2="${w*.5}" y2="${h*.72}" stroke="var(--bd2)" stroke-width=".8"/><text x="${w*.5}" y="${h*.97}" text-anchor="middle" font-size="8" fill="var(--tx3)">Posterior = cortes posteriorizados</text></svg>`,
   supraesternal:(w,h)=>`<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><ellipse cx="${w*.5}" cy="${h*.42}" rx="${w*.3}" ry="${h*.22}" fill="#E6F1FB" stroke="var(--blue)" stroke-width="1.5"/><text x="${w*.5}" y="${h*.44}" text-anchor="middle" font-size="10" fill="#0C447C" font-weight="500">1 — Aorta</text><ellipse cx="${w*.5}" cy="${h*.7}" rx="${w*.42}" ry="${h*.14}" fill="var(--red-bg)" stroke="var(--red)" stroke-width="1.5"/><text x="${w*.5}" y="${h*.72}" text-anchor="middle" font-size="10" fill="var(--red-tx)" font-weight="500">2 — A. Pulmonar Direita</text><rect x="${w*.62}" y="${h*.3}" width="${w*.16}" height="${h*.18}" rx="4" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1"/><text x="${w*.7}" y="${h*.41}" text-anchor="middle" font-size="8" fill="var(--green-tx)">3-VPSD</text><rect x="${w*.18}" y="${h*.5}" width="${w*.16}" height="${h*.18}" rx="4" fill="#EEEDFE" stroke="var(--purple)" stroke-width="1"/><text x="${w*.26}" y="${h*.61}" text-anchor="middle" font-size="8" fill="var(--purple)">4-VPIE</text></svg>`,
@@ -174,55 +217,76 @@ const DG={
   aorta:(w,h)=>`<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><rect x="${w*.05}" y="${h*.05}" width="${w*.43}" height="${h*.55}" rx="5" fill="var(--red-bg)" stroke="var(--red)" stroke-width="1"/><text x="${w*.265}" y="${h*.2}" text-anchor="middle" font-size="9" fill="var(--red-tx)" font-weight="500">Anel Aortico</text><text x="${w*.265}" y="${h*.35}" text-anchor="middle" font-size="8" fill="var(--red)">Mesossistole</text><text x="${w*.265}" y="${h*.48}" text-anchor="middle" font-size="8" fill="var(--red)">Inner-Inner</text><rect x="${w*.52}" y="${h*.05}" width="${w*.43}" height="${h*.55}" rx="5" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1"/><text x="${w*.735}" y="${h*.2}" text-anchor="middle" font-size="9" fill="var(--green-tx)" font-weight="500">Seios + JST + Asc</text><text x="${w*.735}" y="${h*.35}" text-anchor="middle" font-size="8" fill="var(--green)">Telediastole</text><text x="${w*.735}" y="${h*.48}" text-anchor="middle" font-size="8" fill="var(--green)">Leading Edge-LE</text></svg>`,
   ad:(w,h)=>`<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><ellipse cx="${w*.5}" cy="${h*.48}" rx="${w*.38}" ry="${h*.4}" fill="#E6F1FB" stroke="var(--blue)" stroke-width="1.5"/><text x="${w*.5}" y="${h*.22}" text-anchor="middle" font-size="10" fill="#0C447C">Atrio Direito</text><path d="M${w*.5} ${h*.1} Q${w*.85} ${h*.48} ${w*.5} ${h*.85}" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-dasharray="4,2"/><text x="${w*.78}" y="${h*.55}" text-anchor="middle" font-size="8" fill="var(--green-tx)" font-weight="500">Crista terminalis</text><circle cx="${w*.5}" cy="${h*.82}" r="5" fill="var(--red)"/><text x="${w*.5}" y="${h*.97}" text-anchor="middle" font-size="8" fill="var(--red-tx)">VCI = Eustaquio</text><circle cx="${w*.5}" cy="${h*.12}" r="5" fill="var(--purple)"/><text x="${w*.35}" y="${h*.08}" text-anchor="middle" font-size="8" fill="var(--purple)">VCS</text></svg>`
 };
-
 function svg(k){const fn=DG[k];return fn?`<div class="diag">${fn(300,95)}</div>`:''}
 
+// ── STATE ──
 let cards=CARDS,mode='flip',idx=0,order=[],answered=false,sel=null,
-    score={ok:0,err:0},streak=0,flipped=false,done=false,explaining=false,explanation='';
+    score={ok:0,err:0},streak=0,flipped=false,done=false,
+    aiLoading=false,aiResult=null;
 
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=0|Math.random()*(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;}
-function reset(){order=shuffle([...Array(cards.length).keys()]);idx=0;score={ok:0,err:0};streak=0;answered=false;sel=null;done=false;flipped=false;explaining=false;explanation='';mode='flip';render();}
+function resetGame(){order=shuffle([...Array(cards.length).keys()]);idx=0;score={ok:0,err:0};streak=0;answered=false;sel=null;done=false;flipped=false;aiLoading=false;aiResult=null;mode='flip';render();}
 function cc(){return cards[order[idx]];}
 function di(d){return d==='easy'?{l:'Facil',c:'easy',p:'g'}:d==='medium'?{l:'Medio',c:'medium',p:'a'}:{l:'Dificil',c:'hard',p:'r'};}
 
-function getApiKey(){
-  let k=localStorage.getItem('fm_openai_key');
-  if(!k){k=prompt('Cole sua OpenAI API Key (sk-...):');if(k){localStorage.setItem('fm_openai_key',k.trim());}};
-  return k?.trim()||null;
+// ── AUTH ──
+function showLogin(){
+  const $=document.getElementById('app');
+  $.innerHTML=`
+    <div class="login-screen">
+      <div class="login-logo">&#9889;</div>
+      <div class="login-title">FlashMind</div>
+      <div class="login-sub">Anki inteligente para prova DIC<br>Ecocardiografia 2026</div>
+      <button class="login-btn" id="gLogin">
+        <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        Entrar com Google
+      </button>
+    </div>`;
+  document.getElementById('gLogin').onclick=async()=>{
+    try{await signInWithPopup(auth,new GoogleAuthProvider());}catch(e){console.error(e);}
+  };
 }
 
-async function explain(){
-  const key=getApiKey();if(!key){explanation='API key nao configurada.';render();return;}
-  const card=cc();explaining=true;explanation='Gerando explicacao...';render();
-  const wasCorrect=mode==='flip'?null:(sel===card.correct);
-  const userAns=mode==='quiz'&&sel!==null?card.options[sel]:'(flip card)';
-  const prompt=wasCorrect
-    ?`O aluno ACERTOU esta questao de ecocardiografia (prova DIC). Reforce o conhecimento, explique o raciocinio correto e adicione um detalhe extra que pode cair na prova.\n\nQuestao: ${card.question}\nResposta correta: ${card.answer}\nContexto: ${card.detail}`
-    :`O aluno ERROU esta questao de ecocardiografia (prova DIC). Explique de forma didatica por que a resposta dele esta errada e por que a correta esta certa.\n\nQuestao: ${card.question}\nResposta do aluno: ${userAns}\nResposta correta: ${card.answer}\nContexto: ${card.detail}`;
+onAuthStateChanged(auth,(user)=>{
+  currentUser=user;
+  if(user){resetGame();}else{showLogin();}
+});
+
+// ── AI AGENT SWARM ──
+async function callAgents(){
+  const card=cc();
+  aiLoading=true;aiResult=null;render();
+  const wasCorrect=mode==='flip'?true:(sel===card.correct);
+  const userAns=mode==='quiz'&&sel!==null?card.options[sel]:card.answer;
+  const optMap={};
+  ['A','B','C','D'].forEach((l,i)=>{optMap[l]=card.options[i];});
   try{
-    const res=await fetch('https://api.openai.com/v1/chat/completions',{
-      method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},
-      body:JSON.stringify({model:'gpt-4o-mini',messages:[
-        {role:'system',content:'Voce e um professor de ecocardiografia preparando alunos para a prova de titulo DIC. Seja didatico, objetivo e use no maximo 200 palavras. Formate com bullet points quando util. Nao use markdown headers.'},
-        {role:'user',content:prompt}
-      ],max_tokens:500,temperature:0.3})
+    const res=await fetch(FN_URL,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({question:card.question,userAnswer:userAns,correctAnswer:card.answer,detail:card.detail,wasCorrect,options:optMap})
     });
-    if(!res.ok){const e=await res.json();throw new Error(e.error?.message||'Erro API');}
-    const data=await res.json();
-    explanation=data.choices[0].message.content;
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    aiResult=await res.json();
   }catch(e){
-    if(e.message?.includes('Incorrect API key')){localStorage.removeItem('fm_openai_key');explanation='API key invalida. Tente novamente.';}
-    else{explanation='Erro: '+e.message;}
+    console.error(e);
+    aiResult={explicacao:'Erro ao conectar com a IA. Tente novamente.',aprofundamento:'',mnemonico:''};
   }
-  explaining=false;render();
+  aiLoading=false;render();
 }
 
+// ── RENDER ──
 function render(){
   const $=document.getElementById('app');
+  if(!currentUser){showLogin();return;}
   if(done){renderDone($);return;}
   const card=cc(),d=di(card.diff),pct=Math.round(idx/cards.length*100);
   const pips=d.c==='easy'?1:d.c==='medium'?2:3;
-  $.innerHTML=`
+  let h=`
+    <div class="user-bar">
+      <img src="${currentUser.photoURL||''}" alt="" referrerpolicy="no-referrer"/>
+      <span>${currentUser.displayName||currentUser.email}</span>
+      <button id="logout">Sair</button>
+    </div>
     <div class="hdr"><div class="hdr-title"><span>FM</span>Anki DIC</div><div class="streak-pill">&#128293; ${streak}</div></div>
     <div class="stats">
       <div class="st st-ok"><div class="st-n">${score.ok}</div><div class="st-l">Acertos</div></div>
@@ -232,6 +296,8 @@ function render(){
     </div>
     <div class="pb-w"><div class="pb" style="width:${pct}%"></div></div>
     <div class="meta">${Array(pips).fill(`<div class="pip ${d.p}"></div>`).join('')}<span class="diff ${d.c}">${d.l}</span><span class="mode-pill">${mode==='flip'?'Flip':'Quiz'}</span></div>`;
+  $.innerHTML=h;
+  document.getElementById('logout').onclick=()=>signOut(auth);
   if(mode==='flip')renderFlip($,card);else renderQuiz($,card);
 }
 
@@ -245,12 +311,12 @@ function renderFlip($,card){
     const w=document.createElement('div');
     w.innerHTML=`<div class="card" style="cursor:default"><div class="ans-label">Resposta</div><div class="ans">${card.answer}</div>${svg(card.diagram)}<div class="detail">${card.detail}</div></div>`;
     $.appendChild(w);
-    addExplain($);
+    addAI($);
     const a=document.createElement('div');a.className='acts';
     a.innerHTML=`<button class="btn btn-err" id="bE">Errei</button><button class="btn btn-ok" id="bO">Acertei</button>`;
     $.appendChild(a);
-    document.getElementById('bE').onclick=()=>{score.err++;streak=0;flipped=false;explanation='';advance();};
-    document.getElementById('bO').onclick=()=>{score.ok++;streak++;flipped=false;explanation='';advance();};
+    document.getElementById('bE').onclick=()=>{score.err++;streak=0;flipped=false;aiResult=null;advance();};
+    document.getElementById('bO').onclick=()=>{score.ok++;streak++;flipped=false;aiResult=null;advance();};
   }
 }
 
@@ -273,21 +339,40 @@ function renderQuiz($,card){
     const fb=document.createElement('div');fb.className=`fb ${ok?'fb-ok':'fb-err'}`;
     fb.innerHTML=`<b>${ok?'Correto!':'Incorreto'}</b>${card.detail}`;
     $.appendChild(fb);
-    addExplain($);
+    addAI($);
     const a=document.createElement('div');a.className='acts';
     a.innerHTML=`<button class="btn btn-p" id="bN">Proximo</button>`;
     $.appendChild(a);
-    document.getElementById('bN').onclick=()=>{answered=false;sel=null;explanation='';advance();};
+    document.getElementById('bN').onclick=()=>{answered=false;sel=null;aiResult=null;advance();};
   }
 }
 
-function addExplain($){
-  if(explanation&&explanation!=='Gerando explicacao...'){
-    const box=document.createElement('div');box.className='explain-box';box.textContent=explanation;$.appendChild(box);
+function addAI($){
+  const sec=document.createElement('div');sec.className='ai-section';
+
+  if(aiLoading){
+    sec.innerHTML=`<div class="ai-loading"><span class="dots">&#9889; Agentes analisando a questao...</span></div>`;
+    $.appendChild(sec);return;
   }
-  const eb=document.createElement('button');eb.className='explain-btn';eb.disabled=explaining;
-  eb.textContent=explaining?'Gerando explicacao...':explanation?'Explicar novamente':'Explicar com IA';
-  $.appendChild(eb);eb.onclick=()=>explain();
+
+  if(aiResult){
+    if(aiResult.explicacao){
+      sec.innerHTML+=`<div class="ai-card"><div class="ai-card-title t-exp">&#128218; Explicador</div><div class="ai-card-body">${aiResult.explicacao}</div></div>`;
+    }
+    if(aiResult.aprofundamento){
+      sec.innerHTML+=`<div class="ai-card"><div class="ai-card-title t-deep">&#127793; Aprofundamento</div><div class="ai-card-body">${aiResult.aprofundamento}</div></div>`;
+    }
+    if(aiResult.mnemonico){
+      sec.innerHTML+=`<div class="ai-card"><div class="ai-card-title t-mnem">&#129504; Mnemonico</div><div class="ai-card-body">${aiResult.mnemonico}</div></div>`;
+    }
+    $.appendChild(sec);
+    const rb=document.createElement('button');rb.className='explain-btn';rb.textContent='Perguntar de novo';
+    rb.onclick=callAgents;$.appendChild(rb);
+  }else{
+    const eb=document.createElement('button');eb.className='explain-btn';
+    eb.innerHTML='&#9889; Explicar com IA (3 agentes)';
+    eb.onclick=callAgents;$.appendChild(eb);
+  }
 }
 
 function advance(){idx++;if(idx>=cards.length){done=true;saveProgress();render();return;}mode=idx%2===0?'flip':'quiz';render();}
@@ -303,18 +388,20 @@ function renderDone($){
       <div class="st st-err"><div class="st-n">${score.err}</div><div class="st-l">Erros</div></div>
     </div>
     <div class="acts" style="max-width:280px;margin:0 auto;"><button class="btn btn-p" id="bR">Refazer</button></div></div>`;
-  document.getElementById('bR').onclick=reset;
+  document.getElementById('bR').onclick=resetGame;
 }
 
 async function saveProgress(){
+  if(!currentUser)return;
   try{
-    const sid=localStorage.getItem('fm_sid')||crypto.randomUUID();
-    localStorage.setItem('fm_sid',sid);
-    await setDoc(doc(db,'progress',sid),{correct:score.ok,wrong:score.err,total:cards.length,pct:Math.round(score.ok/cards.length*100),streak,ts:new Date().toISOString()},{merge:true});
+    await setDoc(doc(db,'progress',currentUser.uid),{
+      displayName:currentUser.displayName,email:currentUser.email,
+      correct:score.ok,wrong:score.err,total:cards.length,
+      pct:Math.round(score.ok/cards.length*100),streak,
+      ts:new Date().toISOString()
+    },{merge:true});
   }catch(e){console.warn('Firestore:',e);}
 }
-
-reset();
 </script>
 </body>
 </html>
