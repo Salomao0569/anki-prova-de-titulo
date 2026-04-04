@@ -8,7 +8,7 @@
 <title>FlashMind — Anki DIC</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f5f5f3;color:#1a1a1a;min-height:100dvh;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f5f5f3;color:#1a1a1a;min-height:100dvh;-webkit-tap-highlight-color:transparent;}
 :root{
   --bg1:#ffffff;--bg2:#f0efe9;--bg3:#e8e7e2;
   --tx1:#1a1a1a;--tx2:#6b6b68;--tx3:#9b9b98;
@@ -16,7 +16,7 @@ body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f5f5f
   --green:#1D9E75;--green-bg:#E1F5EE;--green-tx:#085041;
   --red:#D85A30;--red-bg:#FAECE7;--red-tx:#4A1B0C;
   --amber:#BA7517;--blue:#378ADD;--purple:#534AB7;
-  --r:8px;--rl:12px;
+  --r:10px;--rl:14px;
 }
 @media(prefers-color-scheme:dark){
   :root{
@@ -33,26 +33,29 @@ body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f5f5f
 /* Login */
 .login-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:80dvh;text-align:center;padding:2rem;}
 .login-logo{font-size:56px;margin-bottom:.75rem;}
-.login-title{font-size:28px;font-weight:700;margin-bottom:.35rem;color:var(--tx1);}
+.login-title{font-size:28px;font-weight:700;margin-bottom:.35rem;}
 .login-sub{font-size:16px;color:var(--tx2);margin-bottom:2.5rem;line-height:1.5;}
-.login-btn{display:flex;align-items:center;gap:12px;padding:1rem 2rem;border-radius:var(--rl);border:.5px solid var(--bd2);background:var(--bg1);font-size:17px;font-weight:600;color:var(--tx1);cursor:pointer;font-family:inherit;transition:box-shadow .15s;}
+.login-btn{display:flex;align-items:center;gap:12px;padding:1rem 2rem;border-radius:var(--rl);border:.5px solid var(--bd2);background:var(--bg1);font-size:17px;font-weight:600;color:var(--tx1);cursor:pointer;font-family:inherit;}
 .login-btn:active{box-shadow:0 0 0 3px var(--blue);}
 .login-btn svg{width:24px;height:24px;}
+
+/* User bar */
 .user-bar{display:flex;align-items:center;gap:10px;padding:.5rem .75rem;border-radius:99px;background:var(--bg2);margin-bottom:.65rem;font-size:13px;color:var(--tx2);}
 .user-bar img{width:28px;height:28px;border-radius:50%;}
 .user-bar button{margin-left:auto;background:none;border:none;color:var(--tx3);font-size:12px;cursor:pointer;font-family:inherit;padding:4px 8px;}
 
-/* Header */
-.hdr{display:flex;align-items:center;justify-content:space-between;padding:.6rem 0;margin-bottom:.65rem;}
+/* Header + counts */
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:.6rem 0;margin-bottom:.5rem;}
 .hdr-title{font-size:15px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:.06em;}
 .hdr-title span{color:var(--green);margin-right:4px;}
-.streak-pill{display:flex;align-items:center;gap:5px;background:var(--bg2);border-radius:99px;padding:6px 14px;font-size:15px;font-weight:600;color:var(--amber);}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1rem;}
-.st{background:var(--bg2);border-radius:var(--r);padding:.65rem .5rem;text-align:center;}
-.st-n{font-size:22px;font-weight:600;}.st-l{font-size:11px;color:var(--tx3);margin-top:2px;text-transform:uppercase;letter-spacing:.04em;}
-.st-ok .st-n{color:var(--green);}.st-err .st-n{color:var(--red);}.st-str .st-n{color:var(--amber);}
+.counts{display:flex;gap:12px;font-size:14px;font-weight:600;}
+.cnt-new{color:var(--blue);}.cnt-learn{color:var(--red);}.cnt-rev{color:var(--green);}
+
+/* Progress */
 .pb-w{height:6px;background:var(--bg2);border-radius:99px;margin-bottom:1rem;overflow:hidden;}
 .pb{height:100%;border-radius:99px;transition:width .4s;background:linear-gradient(90deg,var(--green),#5DCAA5);}
+
+/* Diff */
 .meta{display:flex;align-items:center;gap:6px;margin-bottom:.85rem;}
 .pip{width:9px;height:9px;border-radius:50%;background:var(--bg3);}
 .pip.g{background:var(--green);}.pip.a{background:var(--amber);}.pip.r{background:var(--red);}
@@ -61,7 +64,7 @@ body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f5f5f
 .mode-pill{margin-left:auto;font-size:11px;padding:4px 10px;border-radius:99px;border:.5px solid var(--bd2);color:var(--tx3);text-transform:uppercase;letter-spacing:.04em;}
 
 /* Card */
-.card{border-radius:var(--rl);border:.5px solid var(--bd1);background:var(--bg1);padding:1.35rem;margin-bottom:.85rem;cursor:pointer;transition:box-shadow .15s;}
+.card{border-radius:var(--rl);border:.5px solid var(--bd1);background:var(--bg1);padding:1.35rem;margin-bottom:.85rem;cursor:pointer;}
 .card:active{box-shadow:0 0 0 2px var(--green);}
 .tag{font-size:11px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.6rem;}
 .q{font-size:17px;font-weight:500;color:var(--tx1);line-height:1.6;}
@@ -74,7 +77,7 @@ body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f5f5f
 
 /* Options */
 .opts{display:flex;flex-direction:column;gap:8px;margin-bottom:.85rem;}
-.opt{width:100%;text-align:left;padding:.85rem 1rem;border-radius:var(--r);border:.5px solid var(--bd2);background:var(--bg1);font-size:15px;color:var(--tx1);cursor:pointer;line-height:1.45;transition:background .1s;font-family:inherit;}
+.opt{width:100%;text-align:left;padding:.85rem 1rem;border-radius:var(--r);border:.5px solid var(--bd2);background:var(--bg1);font-size:15px;color:var(--tx1);cursor:pointer;line-height:1.45;font-family:inherit;}
 .opt:active:not(:disabled){background:var(--bg2);}
 .opt.ok{border-color:var(--green);background:var(--green-bg);color:var(--green-tx);}
 .opt.wrong{border-color:var(--red);background:var(--red-bg);color:var(--red-tx);}
@@ -88,34 +91,34 @@ body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f5f5f
 .fb-err{background:var(--red-bg);color:var(--red-tx);border:.5px solid rgba(216,90,48,.3);}
 .fb b{display:block;margin-bottom:4px;font-size:15px;}
 
+/* SRS Buttons */
+.srs-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:.85rem;}
+.srs-btn{padding:.7rem .3rem;border-radius:var(--r);border:1px solid var(--bd2);background:var(--bg1);cursor:pointer;text-align:center;font-family:inherit;transition:background .1s;}
+.srs-btn:active{transform:scale(.97);}
+.srs-btn .srs-time{font-size:14px;font-weight:700;display:block;}
+.srs-btn .srs-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-top:2px;display:block;}
+.srs-btn.s-again{border-color:var(--red);color:var(--red);}.srs-btn.s-again:active{background:var(--red-bg);}
+.srs-btn.s-hard{border-color:var(--amber);color:var(--amber);}.srs-btn.s-hard:active{background:#FFF3E0;}
+.srs-btn.s-good{border-color:var(--green);color:var(--green);}.srs-btn.s-good:active{background:var(--green-bg);}
+.srs-btn.s-easy{border-color:var(--blue);color:var(--blue);}.srs-btn.s-easy:active{background:#E6F1FB;}
+
 /* AI */
-.ai-section{margin-bottom:.85rem;}
-.explain-btn{width:100%;padding:.85rem;border-radius:var(--r);border:.5px solid var(--purple);background:transparent;color:var(--purple);font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;margin-bottom:.85rem;transition:background .12s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.explain-btn{width:100%;padding:.85rem;border-radius:var(--r);border:.5px solid var(--purple);background:transparent;color:var(--purple);font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;margin-bottom:.85rem;display:flex;align-items:center;justify-content:center;gap:8px;}
 .explain-btn:active{background:rgba(83,74,183,.1);}
 .explain-btn:disabled{opacity:.6;cursor:wait;}
-.ai-card{border-radius:var(--r);padding:1rem;background:var(--bg2);border:.5px solid var(--bd1);margin-bottom:.65rem;font-size:14px;color:var(--tx1);line-height:1.65;}
-.ai-card-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.45rem;display:flex;align-items:center;gap:6px;}
-.ai-card-title.t-exp{color:var(--blue);}
-.ai-card-title.t-deep{color:var(--green);}
-.ai-card-title.t-mnem{color:var(--purple);}
-.ai-card-body{white-space:pre-wrap;}
-.ai-loading{text-align:center;padding:.8rem;color:var(--tx3);font-size:12px;}
-.ai-loading .dots{display:inline-block;animation:pulse 1.2s infinite;}
-@keyframes pulse{0%,100%{opacity:.3;}50%{opacity:1;}}
+.ai-card{border-radius:var(--r);padding:1rem;background:var(--bg2);border:.5px solid var(--bd1);margin-bottom:.65rem;font-size:14px;color:var(--tx1);line-height:1.65;white-space:pre-wrap;}
+.ai-card-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.45rem;color:var(--blue);}
+.ai-loading{text-align:center;padding:.8rem;color:var(--tx3);font-size:14px;}
 
-/* Actions */
-.acts{display:flex;gap:10px;margin-top:.5rem;}
-.btn{flex:1;padding:.85rem 1rem;border-radius:var(--r);border:.5px solid var(--bd2);background:transparent;font-size:16px;color:var(--tx1);cursor:pointer;font-weight:600;font-family:inherit;transition:background .12s;}
-.btn:active{background:var(--bg2);}
-.btn-p{background:var(--tx1);color:var(--bg1);border-color:var(--tx1);}
-.btn-ok{border-color:var(--green);color:var(--green);}.btn-ok:active{background:var(--green-bg);}
-.btn-err{border-color:var(--red);color:var(--red);}.btn-err:active{background:var(--red-bg);}
-
-/* Done */
+/* Done / Empty */
 .done{text-align:center;padding:3rem .75rem;}
 .done-icon{font-size:56px;margin-bottom:1rem;}
 .done-t{font-size:24px;font-weight:600;margin-bottom:.4rem;}
 .done-s{font-size:16px;color:var(--tx2);line-height:1.5;margin-bottom:1.5rem;}
+.acts{display:flex;gap:10px;margin-top:.5rem;}
+.btn{flex:1;padding:.85rem 1rem;border-radius:var(--r);border:.5px solid var(--bd2);background:transparent;font-size:16px;color:var(--tx1);cursor:pointer;font-weight:600;font-family:inherit;}
+.btn:active{background:var(--bg2);}
+.btn-p{background:var(--tx1);color:var(--bg1);border-color:var(--tx1);}
 </style>
 </head>
 <body>
@@ -124,272 +127,318 @@ body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f5f5f
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import{getAuth,signInWithRedirect,getRedirectResult,GoogleAuthProvider,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import{getFirestore,doc,setDoc,getDoc,collection,getDocs}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import{getFirestore,doc,setDoc,getDoc,collection,getDocs,writeBatch}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-const fbApp=initializeApp({
-  projectId:"flashmind-anki-ai",
-  appId:"1:368064037355:web:0fefa2220d3a0037a659ae",
-  apiKey:"AIzaSyDbfs7k7vcaaI-qCXRzY2RSo3IJcUspM1A",
-  authDomain:"flashmind-anki-ai.firebaseapp.com",
-  storageBucket:"flashmind-anki-ai.firebasestorage.app",
-  messagingSenderId:"368064037355"
-});
-const auth=getAuth(fbApp);
-const db=getFirestore(fbApp);
+const fbApp=initializeApp({projectId:"flashmind-anki-ai",appId:"1:368064037355:web:0fefa2220d3a0037a659ae",apiKey:"AIzaSyDbfs7k7vcaaI-qCXRzY2RSo3IJcUspM1A",authDomain:"flashmind-anki-ai.firebaseapp.com",storageBucket:"flashmind-anki-ai.firebasestorage.app",messagingSenderId:"368064037355"});
+const auth=getAuth(fbApp);const db=getFirestore(fbApp);
+const FN_URL="https://southamerica-east1-flashmind-anki-ai.cloudfunctions.net/explainQuestion";
 let currentUser=null;
 
-// ── FUNCTION URL ──
-const FN_URL="https://southamerica-east1-flashmind-anki-ai.cloudfunctions.net/explainQuestion";
-
-// ── CARDS ──
+// ══════════════════════════════════════════════
+// CARDS
+// ══════════════════════════════════════════════
 const CARDS=[
-  {id:1,tag:"Valvula tricuspide — cortes 2D",diff:"hard",
-   question:"Em quais cortes a cuspide POSTERIOR da tricuspide e visualizada?",
-   answer:"Bicaval modificado (ETE) e paraesternal via de entrada do VD posteriorizado",
-   detail:"A cuspide posterior so aparece em cortes posteriorizados. No apical 4C padrao e subcostal convencional, veem-se apenas septal e anterior.",
-   diagram:"tricuspide",
-   options:["Apical 4C e subcostal 4C","Paraesternal eixo curto e subcostal 5C","Bicaval modificado (ETE) e paraesternal via de entrada VD posteriorizado","Apical 4C e paraesternal eixo longo VE"],correct:2},
-  {id:2,tag:"Corte supraesternal",diff:"medium",
-   question:"No corte supraesternal com index a 3h, qual estrutura e o numero 2?",
-   answer:"Arteria pulmonar direita",
-   detail:"Sequencia: 1=aorta transversa, 2=arteria pulmonar direita, 3=veia pulmonar superior direita, 4=veia pulmonar inferior esquerda.",
-   diagram:"supraesternal",
-   options:["Arteria pulmonar esquerda","Veia cava superior","Arteria pulmonar direita","Aorta ascendente"],correct:2},
-  {id:3,tag:"Segmentacao do VE",diff:"medium",
-   question:"Qual modelo e padrao para perfusao miocardica e por que?",
-   answer:"17 segmentos — uniformiza com RNM e cintilografia. O 18 segmentos e usado para strain (GLS).",
-   detail:"O apex (seg. 17) nao tem vascularizacao coronaria definida, por isso e incluido na contratilidade mas excluido da perfusao nos modelos de cintilografia.",
-   diagram:"segmentacao",
-   options:["16 segmentos — padrao historico ASE","17 segmentos — uniformiza com RNM e cintilografia","18 segmentos — maior precisao de strain","20 segmentos — mais detalhado"],correct:1},
-  {id:4,tag:"Seio venoso coronario",diff:"hard",
-   question:"Em quais janelas transtoracicas o seio venoso coronario e identificado?",
-   answer:"Paraesternal eixo longo VE, apical 2 camaras e apical 4 camaras posteriorizado",
-   detail:"O seio venoso drena no AD (nao AE). Passa no sulco AV posterior ao anel mitral. Quando dilatado (ex.: ablacao, CRTD), fica mais evidente.",
-   diagram:"seio_venoso",
-   options:["Apical 4C, subcostal e paraesternal eixo curto","Paraesternal eixo longo VE, apical 2C e apical 4C posteriorizado","Supraesternal, bicaval e subcostal 5C","Via de entrada VD, apical 3C e subcostal"],correct:1},
-  {id:5,tag:"VCI — Pressao do AD",diff:"easy",
-   question:"VCI=8mm ao final da expiracao, colapsabilidade >50%. PAD estimada e local de medicao?",
-   answer:"PAD = 3 mmHg. Medir imediatamente abaixo da veia hepatica (0,5-3cm antes do AD)",
-   detail:"Tabela: VCI<21+colapso>50% = 3mmHg; VCI<21+colapso<50% = 8mmHg; VCI>21+colapso>50% = 8mmHg; VCI>21+colapso<50% = 15mmHg.",
-   diagram:"vci",
-   options:["PAD=8mmHg, medir na desembocadura no AD","PAD=15mmHg, medir abaixo da veia hepatica","PAD=5mmHg, porcao distal da VCI","PAD=3mmHg, abaixo da veia hepatica"],correct:3},
-  {id:6,tag:"FEVE — Foreshortening",diff:"medium",
-   question:"O que acontece com a FEVE no Simpson quando ha foreshortening (apical trucado)?",
-   answer:"Superestima — VDF calculado e menor (denominador menor), elevando artificialmente a FEVE",
-   detail:"FEVE=(VDF-VSF)/VDF. Apical trucado -> VDF subestimado -> denominador menor -> FEVE maior que a real.",
-   diagram:"feve",
-   options:["Subestima — excursao apical reduzida","Nao interfere — Simpson e robusto","Superestima — VDF menor eleva artificialmente a FEVE","Subestima — VSF fica artificialmente elevado"],correct:2},
-  {id:7,tag:"FEVE — Insuficiencia Mitral",diff:"medium",
-   question:"Por que a FEVE superestima a funcao sistolica na IM importante?",
-   answer:"O volume regurgitante e computado como parte do stroke volume total, inflando o numerador",
-   detail:"SV total = SV real (VSVE) + Vol. Regurgitante. O VR escapa para o AE durante a sistole mas e contado na FEVE como se fosse ejecao efetiva.",
-   diagram:"feve",
-   options:["Pos-carga reduzida aumenta VDF","Volume regurgitante infla o stroke volume total","IM subestima FEVE por reduzir enchimento","FEVE nao e afetada pela IM"],correct:1},
-  {id:8,tag:"Parede anterior do VD",diff:"easy",
-   question:"A parede ANTERIOR do VD e vista em quais planos?",
-   answer:"Paraesternal via de entrada VD + paraesternal eixo curto (vasos da base) + paraesternal eixo longo VE",
-   detail:"No apical 4C e subcostal ve-se a parede lateral/livre e septal. A parede anterior so aparece nos cortes paraesternais.",
-   diagram:"vd",
-   options:["Apical 4C, apical VD focado e subcostal","Paraesternal via de entrada VD, eixo curto vasos da base e eixo longo VE","Subcostal, supraesternal e apical 2C","Paraesternal eixo longo VE, apical 4C e subcostal"],correct:1},
-  {id:9,tag:"Medidas da aorta",diff:"medium",
-   question:"Em adultos, o anel aortico: quando medir e qual metodologia?",
-   answer:"Mesossistole (antes da onda T) + inner-inner. As demais medidas da aorta: telediastole + leading edge-leading edge.",
-   detail:"Essa padronizacao vale para todas as faixas etarias. O anel na sistole porque a aorta esta maximamente aberta. Seios de Valsalva e alem: diastolico.",
-   diagram:"aorta",
-   options:["Telediastole, leading edge-leading edge","Mesossistole, leading edge-leading edge","Mesossistole, inner-inner","Telediastole, inner-inner"],correct:2},
-  {id:10,tag:"Crista terminalis",diff:"easy",
-   question:"O que e a crista terminalis e como diferencia-la da Valvula de Eustaquio e Rede de Chiari?",
-   answer:"Proeminencia fibromuscular em C no AD (VCS->VCI pela parede lateral). Eustaquio: borda da VCI. Chiari: membranosa, fenestrada, associada a FOP.",
-   detail:"A crista terminalis e uma estrutura solida, fibromuscular. Nao confundir com massas ou tumores — e uma variante normal e pode ser proeminente.",
-   diagram:"ad",
-   options:["Remanescente embriologico na borda da VCI","Membrana fenestrada associada a FOP","Proeminencia fibromuscular em C no AD da VCS ate VCI","Musculo papilar acessorio do VD"],correct:2}
+  {id:"c01",tag:"Valvula tricuspide — cortes 2D",diff:"hard",question:"Em quais cortes a cuspide POSTERIOR da tricuspide e visualizada?",answer:"Bicaval modificado (ETE) e paraesternal via de entrada do VD posteriorizado",detail:"A cuspide posterior so aparece em cortes posteriorizados. No apical 4C padrao e subcostal convencional, veem-se apenas septal e anterior.",diagram:"tricuspide",options:["Apical 4C e subcostal 4C","Paraesternal eixo curto e subcostal 5C","Bicaval modificado (ETE) e paraesternal via de entrada VD posteriorizado","Apical 4C e paraesternal eixo longo VE"],correct:2},
+  {id:"c02",tag:"Corte supraesternal",diff:"medium",question:"No corte supraesternal com index a 3h, qual estrutura e o numero 2?",answer:"Arteria pulmonar direita",detail:"Sequencia: 1=aorta transversa, 2=arteria pulmonar direita, 3=veia pulmonar superior direita, 4=veia pulmonar inferior esquerda.",diagram:"supraesternal",options:["Arteria pulmonar esquerda","Veia cava superior","Arteria pulmonar direita","Aorta ascendente"],correct:2},
+  {id:"c03",tag:"Segmentacao do VE",diff:"medium",question:"Qual modelo e padrao para perfusao miocardica e por que?",answer:"17 segmentos — uniformiza com RNM e cintilografia. O 18 segmentos e usado para strain (GLS).",detail:"O apex (seg. 17) nao tem vascularizacao coronaria definida, por isso e incluido na contratilidade mas excluido da perfusao nos modelos de cintilografia.",diagram:"segmentacao",options:["16 segmentos — padrao historico ASE","17 segmentos — uniformiza com RNM e cintilografia","18 segmentos — maior precisao de strain","20 segmentos — mais detalhado"],correct:1},
+  {id:"c04",tag:"Seio venoso coronario",diff:"hard",question:"Em quais janelas transtoracicas o seio venoso coronario e identificado?",answer:"Paraesternal eixo longo VE, apical 2 camaras e apical 4 camaras posteriorizado",detail:"O seio venoso drena no AD (nao AE). Passa no sulco AV posterior ao anel mitral. Quando dilatado (ex.: ablacao, CRTD), fica mais evidente.",diagram:"seio_venoso",options:["Apical 4C, subcostal e paraesternal eixo curto","Paraesternal eixo longo VE, apical 2C e apical 4C posteriorizado","Supraesternal, bicaval e subcostal 5C","Via de entrada VD, apical 3C e subcostal"],correct:1},
+  {id:"c05",tag:"VCI — Pressao do AD",diff:"easy",question:"VCI=8mm ao final da expiracao, colapsabilidade >50%. PAD estimada e local de medicao?",answer:"PAD = 3 mmHg. Medir imediatamente abaixo da veia hepatica (0,5-3cm antes do AD)",detail:"Tabela: VCI<21+colapso>50% = 3mmHg; VCI<21+colapso<50% = 8mmHg; VCI>21+colapso>50% = 8mmHg; VCI>21+colapso<50% = 15mmHg.",diagram:"vci",options:["PAD=8mmHg, medir na desembocadura no AD","PAD=15mmHg, medir abaixo da veia hepatica","PAD=5mmHg, porcao distal da VCI","PAD=3mmHg, abaixo da veia hepatica"],correct:3},
+  {id:"c06",tag:"FEVE — Foreshortening",diff:"medium",question:"O que acontece com a FEVE no Simpson quando ha foreshortening (apical trucado)?",answer:"Superestima — VDF calculado e menor (denominador menor), elevando artificialmente a FEVE",detail:"FEVE=(VDF-VSF)/VDF. Apical trucado -> VDF subestimado -> denominador menor -> FEVE maior que a real.",diagram:"feve",options:["Subestima — excursao apical reduzida","Nao interfere — Simpson e robusto","Superestima — VDF menor eleva artificialmente a FEVE","Subestima — VSF fica artificialmente elevado"],correct:2},
+  {id:"c07",tag:"FEVE — Insuficiencia Mitral",diff:"medium",question:"Por que a FEVE superestima a funcao sistolica na IM importante?",answer:"O volume regurgitante e computado como parte do stroke volume total, inflando o numerador",detail:"SV total = SV real (VSVE) + Vol. Regurgitante. O VR escapa para o AE durante a sistole mas e contado na FEVE como se fosse ejecao efetiva.",diagram:"feve",options:["Pos-carga reduzida aumenta VDF","Volume regurgitante infla o stroke volume total","IM subestima FEVE por reduzir enchimento","FEVE nao e afetada pela IM"],correct:1},
+  {id:"c08",tag:"Parede anterior do VD",diff:"easy",question:"A parede ANTERIOR do VD e vista em quais planos?",answer:"Paraesternal via de entrada VD + paraesternal eixo curto (vasos da base) + paraesternal eixo longo VE",detail:"No apical 4C e subcostal ve-se a parede lateral/livre e septal. A parede anterior so aparece nos cortes paraesternais.",diagram:"vd",options:["Apical 4C, apical VD focado e subcostal","Paraesternal via de entrada VD, eixo curto vasos da base e eixo longo VE","Subcostal, supraesternal e apical 2C","Paraesternal eixo longo VE, apical 4C e subcostal"],correct:1},
+  {id:"c09",tag:"Medidas da aorta",diff:"medium",question:"Em adultos, o anel aortico: quando medir e qual metodologia?",answer:"Mesossistole (antes da onda T) + inner-inner. As demais medidas da aorta: telediastole + leading edge-leading edge.",detail:"Essa padronizacao vale para todas as faixas etarias. O anel na sistole porque a aorta esta maximamente aberta. Seios de Valsalva e alem: diastolico.",diagram:"aorta",options:["Telediastole, leading edge-leading edge","Mesossistole, leading edge-leading edge","Mesossistole, inner-inner","Telediastole, inner-inner"],correct:2},
+  {id:"c10",tag:"Crista terminalis",diff:"easy",question:"O que e a crista terminalis e como diferencia-la da Valvula de Eustaquio e Rede de Chiari?",answer:"Proeminencia fibromuscular em C no AD (VCS->VCI pela parede lateral). Eustaquio: borda da VCI. Chiari: membranosa, fenestrada, associada a FOP.",detail:"A crista terminalis e uma estrutura solida, fibromuscular. Nao confundir com massas ou tumores — e uma variante normal e pode ser proeminente.",diagram:"ad",options:["Remanescente embriologico na borda da VCI","Membrana fenestrada associada a FOP","Proeminencia fibromuscular em C no AD da VCS ate VCI","Musculo papilar acessorio do VD"],correct:2}
 ];
 
-// ── SVG DIAGRAMS ──
+// ══════════════════════════════════════════════
+// SVG DIAGRAMS (same as before, compact)
+// ══════════════════════════════════════════════
 const DG={
-  tricuspide:(w,h)=>`<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><ellipse cx="${w/2}" cy="${h/2}" rx="${w*.38}" ry="${h*.38}" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1.5"/><text x="${w/2}" y="${h*.18}" text-anchor="middle" font-size="10" fill="var(--green)" font-weight="500">Valvula Tricuspide</text><circle cx="${w*.32}" cy="${h*.38}" r="5" fill="var(--green)"/><text x="${w*.18}" y="${h*.34}" font-size="9" fill="var(--green-tx)">Anterior</text><circle cx="${w*.68}" cy="${h*.38}" r="5" fill="var(--amber)"/><text x="${w*.7}" y="${h*.34}" font-size="9" fill="var(--amber)">Posterior</text><circle cx="${w*.5}" cy="${h*.72}" r="5" fill="var(--purple)"/><text x="${w*.42}" y="${h*.85}" font-size="9" fill="var(--purple)">Septal</text><line x1="${w*.32}" y1="${h*.38}" x2="${w*.5}" y2="${h*.72}" stroke="var(--bd2)" stroke-width=".8"/><line x1="${w*.68}" y1="${h*.38}" x2="${w*.5}" y2="${h*.72}" stroke="var(--bd2)" stroke-width=".8"/><text x="${w*.5}" y="${h*.97}" text-anchor="middle" font-size="8" fill="var(--tx3)">Posterior = cortes posteriorizados</text></svg>`,
-  supraesternal:(w,h)=>`<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><ellipse cx="${w*.5}" cy="${h*.42}" rx="${w*.3}" ry="${h*.22}" fill="#E6F1FB" stroke="var(--blue)" stroke-width="1.5"/><text x="${w*.5}" y="${h*.44}" text-anchor="middle" font-size="10" fill="#0C447C" font-weight="500">1 — Aorta</text><ellipse cx="${w*.5}" cy="${h*.7}" rx="${w*.42}" ry="${h*.14}" fill="var(--red-bg)" stroke="var(--red)" stroke-width="1.5"/><text x="${w*.5}" y="${h*.72}" text-anchor="middle" font-size="10" fill="var(--red-tx)" font-weight="500">2 — A. Pulmonar Direita</text><rect x="${w*.62}" y="${h*.3}" width="${w*.16}" height="${h*.18}" rx="4" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1"/><text x="${w*.7}" y="${h*.41}" text-anchor="middle" font-size="8" fill="var(--green-tx)">3-VPSD</text><rect x="${w*.18}" y="${h*.5}" width="${w*.16}" height="${h*.18}" rx="4" fill="#EEEDFE" stroke="var(--purple)" stroke-width="1"/><text x="${w*.26}" y="${h*.61}" text-anchor="middle" font-size="8" fill="var(--purple)">4-VPIE</text></svg>`,
-  segmentacao:(w,h)=>`<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><rect x="${w*.05}" y="${h*.08}" width="${w*.42}" height="${h*.78}" rx="6" fill="#E6F1FB" stroke="var(--blue)" stroke-width="1"/><text x="${w*.26}" y="${h*.22}" text-anchor="middle" font-size="10" fill="#0C447C" font-weight="500">17 segmentos</text><text x="${w*.26}" y="${h*.4}" text-anchor="middle" font-size="9" fill="#185FA5">Contratilidade</text><text x="${w*.26}" y="${h*.55}" text-anchor="middle" font-size="9" fill="#185FA5">Perfusao + RNM</text><text x="${w*.26}" y="${h*.78}" text-anchor="middle" font-size="8" fill="var(--blue)">padrao universal</text><rect x="${w*.53}" y="${h*.08}" width="${w*.42}" height="${h*.78}" rx="6" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1"/><text x="${w*.74}" y="${h*.22}" text-anchor="middle" font-size="10" fill="var(--green-tx)" font-weight="500">18 segmentos</text><text x="${w*.74}" y="${h*.4}" text-anchor="middle" font-size="9" fill="var(--green)">Strain (GLS)</text><text x="${w*.74}" y="${h*.55}" text-anchor="middle" font-size="9" fill="var(--green)">AutoStrain / AFI</text></svg>`,
-  seio_venoso:(w,h)=>`<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><ellipse cx="${w*.38}" cy="${h*.45}" rx="${w*.28}" ry="${h*.35}" fill="#EEEDFE" stroke="var(--purple)" stroke-width="1.5"/><text x="${w*.38}" y="${h*.42}" text-anchor="middle" font-size="9" fill="var(--purple)">AE</text><ellipse cx="${w*.62}" cy="${h*.45}" rx="${w*.22}" ry="${h*.28}" fill="#E6F1FB" stroke="var(--blue)" stroke-width="1.5"/><text x="${w*.62}" y="${h*.42}" text-anchor="middle" font-size="9" fill="#0C447C">AD</text><path d="M${w*.18} ${h*.62} Q${w*.38} ${h*.78} ${w*.62} ${h*.65}" fill="none" stroke="var(--red)" stroke-width="2.5"/><circle cx="${w*.62}" cy="${h*.65}" r="4" fill="var(--red)"/><text x="${w*.5}" y="${h*.9}" text-anchor="middle" font-size="9" fill="var(--red-tx)" font-weight="500">Seio Venoso drena no AD</text></svg>`,
-  vci:(w,h)=>`<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><rect x="${w*.4}" y="${h*.05}" width="${w*.2}" height="${h*.3}" rx="4" fill="#E6F1FB" stroke="var(--blue)" stroke-width="1.5"/><text x="${w*.5}" y="${h*.22}" text-anchor="middle" font-size="9" fill="#0C447C">AD</text><rect x="${w*.43}" y="${h*.35}" width="${w*.14}" height="${h*.55}" rx="3" fill="var(--red-bg)" stroke="var(--red)" stroke-width="1.5"/><text x="${w*.5}" y="${h*.65}" text-anchor="middle" font-size="9" fill="var(--red-tx)">VCI</text><line x1="${w*.25}" y1="${h*.5}" x2="${w*.43}" y2="${h*.5}" stroke="var(--green)" stroke-width="1.5" stroke-dasharray="3,2"/><circle cx="${w*.43}" cy="${h*.5}" r="4" fill="var(--green)"/><text x="${w*.22}" y="${h*.46}" font-size="9" fill="var(--green-tx)">V.Hepatica</text><text x="${w*.5}" y="${h*.97}" text-anchor="middle" font-size="8" fill="var(--tx3)">Medir abaixo da hepatica (0,5-3cm)</text></svg>`,
-  feve:(w,h)=>`<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><rect x="${w*.05}" y="${h*.08}" width="${w*.9}" height="${h*.32}" rx="6" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1"/><text x="${w*.5}" y="${h*.2}" text-anchor="middle" font-size="10" fill="var(--green-tx)" font-weight="500">FEVE = (VDF - VSF) / VDF</text><text x="${w*.5}" y="${h*.32}" text-anchor="middle" font-size="9" fill="var(--green)">Numerador: Stroke Volume</text><rect x="${w*.05}" y="${h*.48}" width="${w*.43}" height="${h*.38}" rx="5" fill="var(--red-bg)" stroke="var(--red)" stroke-width="1"/><text x="${w*.265}" y="${h*.62}" text-anchor="middle" font-size="9" fill="var(--red-tx)" font-weight="500">Foreshortening</text><text x="${w*.265}" y="${h*.78}" text-anchor="middle" font-size="8" fill="var(--red)">VDF menor = FEVE maior</text><rect x="${w*.52}" y="${h*.48}" width="${w*.43}" height="${h*.38}" rx="5" fill="var(--red-bg)" stroke="var(--red)" stroke-width="1"/><text x="${w*.735}" y="${h*.62}" text-anchor="middle" font-size="9" fill="var(--red-tx)" font-weight="500">Insuf. Mitral</text><text x="${w*.735}" y="${h*.78}" text-anchor="middle" font-size="8" fill="var(--red)">VR infla SV = FEVE maior</text></svg>`,
-  vd:(w,h)=>`<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><text x="${w*.5}" y="${h*.1}" text-anchor="middle" font-size="10" fill="var(--tx3)" font-weight="500">Parede Anterior do VD</text><rect x="${w*.05}" y="${h*.18}" width="${w*.28}" height="${h*.28}" rx="4" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1"/><text x="${w*.19}" y="${h*.34}" text-anchor="middle" font-size="8" fill="var(--green-tx)">Via entrada VD</text><rect x="${w*.37}" y="${h*.18}" width="${w*.28}" height="${h*.28}" rx="4" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1"/><text x="${w*.51}" y="${h*.34}" text-anchor="middle" font-size="8" fill="var(--green-tx)">Eixo curto</text><rect x="${w*.69}" y="${h*.18}" width="${w*.27}" height="${h*.28}" rx="4" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1"/><text x="${w*.825}" y="${h*.34}" text-anchor="middle" font-size="8" fill="var(--green-tx)">Eixo longo</text><rect x="${w*.2}" y="${h*.58}" width="${w*.28}" height="${h*.28}" rx="4" fill="var(--red-bg)" stroke="var(--red)" stroke-width="1"/><text x="${w*.34}" y="${h*.74}" text-anchor="middle" font-size="8" fill="var(--red-tx)">Apical 4C</text><rect x="${w*.52}" y="${h*.58}" width="${w*.28}" height="${h*.28}" rx="4" fill="var(--red-bg)" stroke="var(--red)" stroke-width="1"/><text x="${w*.66}" y="${h*.74}" text-anchor="middle" font-size="8" fill="var(--red-tx)">Subcostal</text></svg>`,
-  aorta:(w,h)=>`<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><rect x="${w*.05}" y="${h*.05}" width="${w*.43}" height="${h*.55}" rx="5" fill="var(--red-bg)" stroke="var(--red)" stroke-width="1"/><text x="${w*.265}" y="${h*.2}" text-anchor="middle" font-size="9" fill="var(--red-tx)" font-weight="500">Anel Aortico</text><text x="${w*.265}" y="${h*.35}" text-anchor="middle" font-size="8" fill="var(--red)">Mesossistole</text><text x="${w*.265}" y="${h*.48}" text-anchor="middle" font-size="8" fill="var(--red)">Inner-Inner</text><rect x="${w*.52}" y="${h*.05}" width="${w*.43}" height="${h*.55}" rx="5" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1"/><text x="${w*.735}" y="${h*.2}" text-anchor="middle" font-size="9" fill="var(--green-tx)" font-weight="500">Seios + JST + Asc</text><text x="${w*.735}" y="${h*.35}" text-anchor="middle" font-size="8" fill="var(--green)">Telediastole</text><text x="${w*.735}" y="${h*.48}" text-anchor="middle" font-size="8" fill="var(--green)">Leading Edge-LE</text></svg>`,
-  ad:(w,h)=>`<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><ellipse cx="${w*.5}" cy="${h*.48}" rx="${w*.38}" ry="${h*.4}" fill="#E6F1FB" stroke="var(--blue)" stroke-width="1.5"/><text x="${w*.5}" y="${h*.22}" text-anchor="middle" font-size="10" fill="#0C447C">Atrio Direito</text><path d="M${w*.5} ${h*.1} Q${w*.85} ${h*.48} ${w*.5} ${h*.85}" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-dasharray="4,2"/><text x="${w*.78}" y="${h*.55}" text-anchor="middle" font-size="8" fill="var(--green-tx)" font-weight="500">Crista terminalis</text><circle cx="${w*.5}" cy="${h*.82}" r="5" fill="var(--red)"/><text x="${w*.5}" y="${h*.97}" text-anchor="middle" font-size="8" fill="var(--red-tx)">VCI = Eustaquio</text><circle cx="${w*.5}" cy="${h*.12}" r="5" fill="var(--purple)"/><text x="${w*.35}" y="${h*.08}" text-anchor="middle" font-size="8" fill="var(--purple)">VCS</text></svg>`
+  tricuspide:(w,h)=>`<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><ellipse cx="${w/2}" cy="${h/2}" rx="${w*.38}" ry="${h*.38}" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1.5"/><text x="${w/2}" y="${h*.18}" text-anchor="middle" font-size="10" fill="var(--green)" font-weight="500">Valvula Tricuspide</text><circle cx="${w*.32}" cy="${h*.38}" r="5" fill="var(--green)"/><text x="${w*.18}" y="${h*.34}" font-size="9" fill="var(--green-tx)">Anterior</text><circle cx="${w*.68}" cy="${h*.38}" r="5" fill="var(--amber)"/><text x="${w*.7}" y="${h*.34}" font-size="9" fill="var(--amber)">Posterior</text><circle cx="${w*.5}" cy="${h*.72}" r="5" fill="var(--purple)"/><text x="${w*.42}" y="${h*.85}" font-size="9" fill="var(--purple)">Septal</text></svg>`,
+  supraesternal:(w,h)=>`<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><ellipse cx="${w*.5}" cy="${h*.42}" rx="${w*.3}" ry="${h*.22}" fill="#E6F1FB" stroke="var(--blue)" stroke-width="1.5"/><text x="${w*.5}" y="${h*.44}" text-anchor="middle" font-size="10" fill="#0C447C" font-weight="500">1 — Aorta</text><ellipse cx="${w*.5}" cy="${h*.7}" rx="${w*.42}" ry="${h*.14}" fill="var(--red-bg)" stroke="var(--red)" stroke-width="1.5"/><text x="${w*.5}" y="${h*.72}" text-anchor="middle" font-size="10" fill="var(--red-tx)" font-weight="500">2 — A. Pulm. Direita</text></svg>`,
+  segmentacao:(w,h)=>`<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><rect x="${w*.05}" y="${h*.08}" width="${w*.42}" height="${h*.78}" rx="6" fill="#E6F1FB" stroke="var(--blue)" stroke-width="1"/><text x="${w*.26}" y="${h*.3}" text-anchor="middle" font-size="10" fill="#0C447C" font-weight="500">17 seg</text><text x="${w*.26}" y="${h*.55}" text-anchor="middle" font-size="9" fill="#185FA5">Perfusao+RNM</text><rect x="${w*.53}" y="${h*.08}" width="${w*.42}" height="${h*.78}" rx="6" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1"/><text x="${w*.74}" y="${h*.3}" text-anchor="middle" font-size="10" fill="var(--green-tx)" font-weight="500">18 seg</text><text x="${w*.74}" y="${h*.55}" text-anchor="middle" font-size="9" fill="var(--green)">Strain GLS</text></svg>`,
+  seio_venoso:(w,h)=>`<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><ellipse cx="${w*.38}" cy="${h*.45}" rx="${w*.28}" ry="${h*.35}" fill="#EEEDFE" stroke="var(--purple)" stroke-width="1.5"/><text x="${w*.38}" y="${h*.45}" text-anchor="middle" font-size="9" fill="var(--purple)">AE</text><ellipse cx="${w*.62}" cy="${h*.45}" rx="${w*.22}" ry="${h*.28}" fill="#E6F1FB" stroke="var(--blue)" stroke-width="1.5"/><text x="${w*.62}" y="${h*.45}" text-anchor="middle" font-size="9" fill="#0C447C">AD</text><path d="M${w*.18} ${h*.62} Q${w*.38} ${h*.78} ${w*.62} ${h*.65}" fill="none" stroke="var(--red)" stroke-width="2.5"/><text x="${w*.5}" y="${h*.92}" text-anchor="middle" font-size="9" fill="var(--red-tx)" font-weight="500">Seio Venoso → AD</text></svg>`,
+  vci:(w,h)=>`<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><rect x="${w*.4}" y="${h*.05}" width="${w*.2}" height="${h*.3}" rx="4" fill="#E6F1FB" stroke="var(--blue)" stroke-width="1.5"/><text x="${w*.5}" y="${h*.22}" text-anchor="middle" font-size="9" fill="#0C447C">AD</text><rect x="${w*.43}" y="${h*.35}" width="${w*.14}" height="${h*.55}" rx="3" fill="var(--red-bg)" stroke="var(--red)" stroke-width="1.5"/><text x="${w*.5}" y="${h*.65}" text-anchor="middle" font-size="9" fill="var(--red-tx)">VCI</text><line x1="${w*.25}" y1="${h*.5}" x2="${w*.43}" y2="${h*.5}" stroke="var(--green)" stroke-width="1.5" stroke-dasharray="3,2"/><circle cx="${w*.43}" cy="${h*.5}" r="4" fill="var(--green)"/><text x="${w*.22}" y="${h*.46}" font-size="9" fill="var(--green-tx)">V.Hep</text></svg>`,
+  feve:(w,h)=>`<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><rect x="${w*.05}" y="${h*.08}" width="${w*.9}" height="${h*.32}" rx="6" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1"/><text x="${w*.5}" y="${h*.28}" text-anchor="middle" font-size="10" fill="var(--green-tx)" font-weight="500">FEVE = (VDF-VSF)/VDF</text><rect x="${w*.05}" y="${h*.48}" width="${w*.43}" height="${h*.38}" rx="5" fill="var(--red-bg)" stroke="var(--red)" stroke-width="1"/><text x="${w*.265}" y="${h*.72}" text-anchor="middle" font-size="9" fill="var(--red-tx)" font-weight="500">Foreshortening↑</text><rect x="${w*.52}" y="${h*.48}" width="${w*.43}" height="${h*.38}" rx="5" fill="var(--red-bg)" stroke="var(--red)" stroke-width="1"/><text x="${w*.735}" y="${h*.72}" text-anchor="middle" font-size="9" fill="var(--red-tx)" font-weight="500">Insuf.Mitral↑</text></svg>`,
+  vd:(w,h)=>`<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><text x="${w*.5}" y="${h*.12}" text-anchor="middle" font-size="10" fill="var(--tx3)" font-weight="500">Parede Anterior VD</text><rect x="${w*.05}" y="${h*.2}" width="${w*.28}" height="${h*.3}" rx="4" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1"/><text x="${w*.19}" y="${h*.38}" text-anchor="middle" font-size="8" fill="var(--green-tx)">Via entrada</text><rect x="${w*.37}" y="${h*.2}" width="${w*.28}" height="${h*.3}" rx="4" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1"/><text x="${w*.51}" y="${h*.38}" text-anchor="middle" font-size="8" fill="var(--green-tx)">Eixo curto</text><rect x="${w*.69}" y="${h*.2}" width="${w*.27}" height="${h*.3}" rx="4" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1"/><text x="${w*.825}" y="${h*.38}" text-anchor="middle" font-size="8" fill="var(--green-tx)">Eixo longo</text></svg>`,
+  aorta:(w,h)=>`<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><rect x="${w*.05}" y="${h*.05}" width="${w*.43}" height="${h*.55}" rx="5" fill="var(--red-bg)" stroke="var(--red)" stroke-width="1"/><text x="${w*.265}" y="${h*.25}" text-anchor="middle" font-size="9" fill="var(--red-tx)" font-weight="500">Anel</text><text x="${w*.265}" y="${h*.45}" text-anchor="middle" font-size="8" fill="var(--red)">Mesossist. Inner-Inner</text><rect x="${w*.52}" y="${h*.05}" width="${w*.43}" height="${h*.55}" rx="5" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1"/><text x="${w*.735}" y="${h*.25}" text-anchor="middle" font-size="9" fill="var(--green-tx)" font-weight="500">Seios+JST+Asc</text><text x="${w*.735}" y="${h*.45}" text-anchor="middle" font-size="8" fill="var(--green)">Telediast. LE-LE</text></svg>`,
+  ad:(w,h)=>`<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><ellipse cx="${w*.5}" cy="${h*.48}" rx="${w*.38}" ry="${h*.4}" fill="#E6F1FB" stroke="var(--blue)" stroke-width="1.5"/><text x="${w*.5}" y="${h*.25}" text-anchor="middle" font-size="10" fill="#0C447C">Atrio Direito</text><path d="M${w*.5} ${h*.1} Q${w*.85} ${h*.48} ${w*.5} ${h*.85}" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-dasharray="4,2"/><text x="${w*.78}" y="${h*.55}" text-anchor="middle" font-size="8" fill="var(--green-tx)" font-weight="500">Crista term.</text></svg>`
 };
-function svg(k){const fn=DG[k];return fn?`<div class="diag">${fn(300,95)}</div>`:''}
+function svg(k){const fn=DG[k];return fn?`<div class="diag">${fn(300,90)}</div>`:''}
 
-// ── STATE ──
-let cards=CARDS,mode='flip',idx=0,order=[],answered=false,sel=null,
-    score={ok:0,err:0},streak=0,flipped=false,done=false,
-    aiLoading=false,aiResult=null;
+// ══════════════════════════════════════════════
+// SRS ENGINE (Anki SM-2 algorithm)
+// ══════════════════════════════════════════════
+const SRS_DEFAULT={state:'new',interval:0,ease:2.5,due:0,reviews:0,lapses:0};
 
-function shuffle(a){for(let i=a.length-1;i>0;i--){const j=0|Math.random()*(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;}
-function resetGame(){order=shuffle([...Array(cards.length).keys()]);idx=0;score={ok:0,err:0};streak=0;answered=false;sel=null;done=false;flipped=false;aiLoading=false;aiResult=null;mode='flip';render();}
-function cc(){return cards[order[idx]];}
-function di(d){return d==='easy'?{l:'Facil',c:'easy',p:'g'}:d==='medium'?{l:'Medio',c:'medium',p:'a'}:{l:'Dificil',c:'hard',p:'r'};}
+function srsCalc(srs,rating){
+  // rating: 1=Again, 2=Hard, 3=Good, 4=Easy
+  const now=Date.now();
+  let{interval,ease,reviews,lapses}=srs;
+  let newInterval,newEase=ease;
 
-// ── AUTH ──
-function showLogin(){
-  const $=document.getElementById('app');
-  $.innerHTML=`
-    <div class="login-screen">
-      <div class="login-logo">&#9889;</div>
-      <div class="login-title">FlashMind</div>
-      <div class="login-sub">Anki inteligente para prova DIC<br>Ecocardiografia 2026</div>
-      <button class="login-btn" id="gLogin">
-        <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-        Entrar com Google
-      </button>
-    </div>`;
-  document.getElementById('gLogin').onclick=()=>{signInWithRedirect(auth,new GoogleAuthProvider());};
+  if(rating===1){ // Again
+    newInterval=1/1440; // 1 minute (in days)
+    newEase=Math.max(ease-0.2,1.3);
+    lapses++;
+  }else if(rating===2){ // Hard
+    newInterval=interval<1?6/1440:Math.max(interval*1.2,1); // 6min or *1.2
+    newEase=Math.max(ease-0.15,1.3);
+  }else if(rating===3){ // Good
+    if(interval<1) newInterval=10/1440; // 10min
+    else if(reviews<2) newInterval=1; // 1 day
+    else newInterval=Math.round(interval*ease);
+  }else{ // Easy
+    if(interval<1) newInterval=4; // 4 days
+    else newInterval=Math.round(interval*ease*1.3);
+    newEase=ease+0.15;
+  }
+
+  // Cap at 365 days
+  if(newInterval>365) newInterval=365;
+
+  const dueMs=now+newInterval*86400000;
+  return{state:rating===1?'relearning':'review',interval:newInterval,ease:newEase,due:dueMs,reviews:reviews+1,lapses};
 }
 
-onAuthStateChanged(auth,(user)=>{
+function intervalLabel(srs,rating){
+  const r=srsCalc(srs,rating);
+  const d=r.interval;
+  if(d<1/60) return '<1m';
+  if(d<1/24) return Math.round(d*1440)+'m';
+  if(d<1) return Math.round(d*24)+'h';
+  if(d<30) return Math.round(d)+'d';
+  if(d<365) return Math.round(d/30)+'mo';
+  return Math.round(d/365)+'a';
+}
+
+// ══════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════
+let srsData={};// cardId -> srs object
+let queue=[];// card ids to review this session
+let qIdx=0;
+let revealed=false;
+let quizAnswered=false;
+let quizSel=null;
+let aiLoading=false;
+let aiResult=null;
+let sessionStats={ok:0,err:0};
+
+// ══════════════════════════════════════════════
+// FIRESTORE SRS SYNC
+// ══════════════════════════════════════════════
+async function loadSRS(){
+  srsData={};
+  if(!currentUser)return;
+  try{
+    const snap=await getDocs(collection(db,'users',currentUser.uid,'srs'));
+    snap.forEach(d=>{srsData[d.id]=d.data();});
+  }catch(e){console.warn('loadSRS:',e);}
+  // Init missing cards
+  CARDS.forEach(c=>{if(!srsData[c.id])srsData[c.id]={...SRS_DEFAULT};});
+}
+
+async function saveSRS(cardId,data){
+  srsData[cardId]=data;
+  if(!currentUser)return;
+  try{await setDoc(doc(db,'users',currentUser.uid,'srs',cardId),data);}catch(e){console.warn('saveSRS:',e);}
+}
+
+function buildQueue(){
+  const now=Date.now();
+  const due=[];const newCards=[];
+  CARDS.forEach(c=>{
+    const s=srsData[c.id]||{...SRS_DEFAULT};
+    if(s.state==='new') newCards.push(c.id);
+    else if(s.due<=now) due.push(c.id);
+  });
+  // Overdue first (sorted by oldest due), then new cards
+  due.sort((a,b)=>(srsData[a].due||0)-(srsData[b].due||0));
+  queue=[...due,...newCards];
+  qIdx=0;
+  sessionStats={ok:0,err:0};
+}
+
+function countCards(){
+  const now=Date.now();let nw=0,learn=0,rev=0;
+  CARDS.forEach(c=>{
+    const s=srsData[c.id]||{...SRS_DEFAULT};
+    if(s.state==='new')nw++;
+    else if(s.state==='relearning'||(s.state==='review'&&s.interval<1&&s.due<=now))learn++;
+    else if(s.due<=now)rev++;
+  });
+  return{nw,learn,rev};
+}
+
+// ══════════════════════════════════════════════
+// AUTH
+// ══════════════════════════════════════════════
+function showLogin(){
+  const $=document.getElementById('app');
+  $.innerHTML=`<div class="login-screen"><div class="login-logo">&#9889;</div><div class="login-title">FlashMind</div><div class="login-sub">Anki inteligente para prova DIC<br>Repeticao espacada + IA</div>
+    <button class="login-btn" id="gL"><svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>Entrar com Google</button></div>`;
+  document.getElementById('gL').onclick=()=>{signInWithRedirect(auth,new GoogleAuthProvider());};
+}
+
+onAuthStateChanged(auth,async(user)=>{
   currentUser=user;
-  if(user){resetGame();}else{showLogin();}
+  if(user){await loadSRS();buildQueue();render();}
+  else showLogin();
 });
 
-// ── AI EXPLAIN ──
+// ══════════════════════════════════════════════
+// AI
+// ══════════════════════════════════════════════
 async function callExplain(){
-  const card=cc();
+  const card=CARDS.find(c=>c.id===queue[qIdx]);if(!card)return;
   aiLoading=true;aiResult=null;render();
-  const wasCorrect=mode==='flip'?true:(sel===card.correct);
-  const userAns=mode==='quiz'&&sel!==null?card.options[sel]:card.answer;
+  const wasCorrect=quizSel===null||quizSel===card.correct;
+  const userAns=quizSel!==null?card.options[quizSel]:card.answer;
   try{
-    const res=await fetch(FN_URL,{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({question:card.question,userAnswer:userAns,correctAnswer:card.answer,detail:card.detail,wasCorrect})
-    });
+    const res=await fetch(FN_URL,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({question:card.question,userAnswer:userAns,correctAnswer:card.answer,detail:card.detail,wasCorrect})});
     if(!res.ok)throw new Error('HTTP '+res.status);
-    const data=await res.json();
-    aiResult=data.explanation;
-  }catch(e){
-    console.error(e);
-    aiResult='Erro ao conectar com a IA. Tente novamente.';
-  }
+    const data=await res.json();aiResult=data.explanation;
+  }catch(e){console.error(e);aiResult='Erro ao conectar com a IA.';}
   aiLoading=false;render();
 }
 
-// ── RENDER ──
+// ══════════════════════════════════════════════
+// SRS RATE
+// ══════════════════════════════════════════════
+async function rate(rating){
+  const cardId=queue[qIdx];
+  const old=srsData[cardId]||{...SRS_DEFAULT};
+  const updated=srsCalc(old,rating);
+  await saveSRS(cardId,updated);
+  if(rating>=3)sessionStats.ok++;else sessionStats.err++;
+  revealed=false;quizAnswered=false;quizSel=null;aiLoading=false;aiResult=null;
+  qIdx++;
+  render();
+}
+
+// ══════════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════════
 function render(){
   const $=document.getElementById('app');
   if(!currentUser){showLogin();return;}
-  if(done){renderDone($);return;}
-  const card=cc(),d=di(card.diff),pct=Math.round(idx/cards.length*100);
-  const pips=d.c==='easy'?1:d.c==='medium'?2:3;
-  let h=`
-    <div class="user-bar">
-      <img src="${currentUser.photoURL||''}" alt="" referrerpolicy="no-referrer"/>
-      <span>${currentUser.displayName||currentUser.email}</span>
-      <button id="logout">Sair</button>
-    </div>
-    <div class="hdr"><div class="hdr-title"><span>FM</span>Anki DIC</div><div class="streak-pill">&#128293; ${streak}</div></div>
-    <div class="stats">
-      <div class="st st-ok"><div class="st-n">${score.ok}</div><div class="st-l">Acertos</div></div>
-      <div class="st st-err"><div class="st-n">${score.err}</div><div class="st-l">Erros</div></div>
-      <div class="st st-str"><div class="st-n">${streak}</div><div class="st-l">Streak</div></div>
-      <div class="st"><div class="st-n">${cards.length-idx}</div><div class="st-l">Restam</div></div>
+
+  // Session done?
+  if(qIdx>=queue.length){renderDone($);return;}
+
+  const cardId=queue[qIdx];
+  const card=CARDS.find(c=>c.id===cardId);
+  const srs=srsData[cardId]||{...SRS_DEFAULT};
+  const cnt=countCards();
+  const pct=queue.length?Math.round(qIdx/queue.length*100):0;
+  const di=card.diff==='easy'?{l:'Facil',c:'easy',p:'g'}:card.diff==='medium'?{l:'Medio',c:'medium',p:'a'}:{l:'Dificil',c:'hard',p:'r'};
+  const pips=di.c==='easy'?1:di.c==='medium'?2:3;
+  const isQuiz=qIdx%2!==0;
+
+  $.innerHTML=`
+    <div class="user-bar"><img src="${currentUser.photoURL||''}" alt="" referrerpolicy="no-referrer"/><span>${currentUser.displayName||''}</span><button id="lo">Sair</button></div>
+    <div class="hdr">
+      <div class="hdr-title"><span>FM</span>Anki DIC</div>
+      <div class="counts"><span class="cnt-new">${cnt.nw} novos</span><span class="cnt-learn">${cnt.learn} aprend.</span><span class="cnt-rev">${cnt.rev} revis.</span></div>
     </div>
     <div class="pb-w"><div class="pb" style="width:${pct}%"></div></div>
-    <div class="meta">${Array(pips).fill(`<div class="pip ${d.p}"></div>`).join('')}<span class="diff ${d.c}">${d.l}</span><span class="mode-pill">${mode==='flip'?'Flip':'Quiz'}</span></div>`;
-  $.innerHTML=h;
-  document.getElementById('logout').onclick=()=>signOut(auth);
-  if(mode==='flip')renderFlip($,card);else renderQuiz($,card);
+    <div class="meta">${Array(pips).fill(`<div class="pip ${di.p}"></div>`).join('')}<span class="diff ${di.c}">${di.l}</span><span class="mode-pill">${isQuiz?'Quiz':'Flip'}</span></div>`;
+  document.getElementById('lo').onclick=()=>signOut(auth);
+
+  if(isQuiz) renderQuiz($,card,srs);
+  else renderFlip($,card,srs);
 }
 
-function renderFlip($,card){
-  if(!flipped){
+function renderFlip($,card,srs){
+  if(!revealed){
     const w=document.createElement('div');
     w.innerHTML=`<div class="card" id="fc"><div class="tag">${card.tag}</div><div class="q">${card.question}</div><div class="hint">Toque para revelar</div></div>`;
     $.appendChild(w);
-    document.getElementById('fc').onclick=()=>{flipped=true;render();};
+    document.getElementById('fc').onclick=()=>{revealed=true;render();};
   }else{
     const w=document.createElement('div');
     w.innerHTML=`<div class="card" style="cursor:default"><div class="ans-label">Resposta</div><div class="ans">${card.answer}</div>${svg(card.diagram)}<div class="detail">${card.detail}</div></div>`;
     $.appendChild(w);
     addAI($);
-    const a=document.createElement('div');a.className='acts';
-    a.innerHTML=`<button class="btn btn-err" id="bE">Errei</button><button class="btn btn-ok" id="bO">Acertei</button>`;
-    $.appendChild(a);
-    document.getElementById('bE').onclick=()=>{score.err++;streak=0;flipped=false;aiResult=null;advance();};
-    document.getElementById('bO').onclick=()=>{score.ok++;streak++;flipped=false;aiResult=null;advance();};
+    addSRSButtons($,srs);
   }
 }
 
-function renderQuiz($,card){
+function renderQuiz($,card,srs){
   const qd=document.createElement('div');qd.className='card';qd.style.cursor='default';
   qd.innerHTML=`<div class="tag">${card.tag}</div><div class="q">${card.question}</div>`;
-  if(answered)qd.innerHTML+=svg(card.diagram);
+  if(quizAnswered)qd.innerHTML+=svg(card.diagram);
   $.appendChild(qd);
+
   const opts=document.createElement('div');opts.className='opts';
   ['A','B','C','D'].forEach((l,i)=>{
-    const b=document.createElement('button');b.className='opt';b.disabled=answered;
-    if(answered){if(i===card.correct)b.classList.add('ok');else if(i===sel)b.classList.add('wrong');}
+    const b=document.createElement('button');b.className='opt';b.disabled=quizAnswered;
+    if(quizAnswered){if(i===card.correct)b.classList.add('ok');else if(i===quizSel)b.classList.add('wrong');}
     b.innerHTML=`<span class="ol">${l}.</span>${card.options[i]}`;
-    if(!answered)b.onclick=()=>{sel=i;answered=true;if(i===card.correct){score.ok++;streak++;}else{score.err++;streak=0;}render();};
+    if(!quizAnswered)b.onclick=()=>{quizSel=i;quizAnswered=true;render();};
     opts.appendChild(b);
   });
   $.appendChild(opts);
-  if(answered){
-    const ok=sel===card.correct;
+
+  if(quizAnswered){
+    const ok=quizSel===card.correct;
     const fb=document.createElement('div');fb.className=`fb ${ok?'fb-ok':'fb-err'}`;
     fb.innerHTML=`<b>${ok?'Correto!':'Incorreto'}</b>${card.detail}`;
     $.appendChild(fb);
     addAI($);
-    const a=document.createElement('div');a.className='acts';
-    a.innerHTML=`<button class="btn btn-p" id="bN">Proximo</button>`;
-    $.appendChild(a);
-    document.getElementById('bN').onclick=()=>{answered=false;sel=null;aiResult=null;advance();};
+    addSRSButtons($,srs);
   }
+}
+
+function addSRSButtons($,srs){
+  const row=document.createElement('div');row.className='srs-row';
+  [{r:1,cls:'s-again',lbl:'Denovo'},{r:2,cls:'s-hard',lbl:'Dificil'},{r:3,cls:'s-good',lbl:'Bom'},{r:4,cls:'s-easy',lbl:'Facil'}].forEach(({r,cls,lbl})=>{
+    const b=document.createElement('button');b.className=`srs-btn ${cls}`;
+    b.innerHTML=`<span class="srs-time">${intervalLabel(srs,r)}</span><span class="srs-label">${lbl}</span>`;
+    b.onclick=()=>rate(r);
+    row.appendChild(b);
+  });
+  $.appendChild(row);
 }
 
 function addAI($){
   if(aiLoading){
-    const ld=document.createElement('div');ld.className='ai-loading';
-    ld.innerHTML='<span class="dots">&#9889; Gerando explicacao...</span>';
-    $.appendChild(ld);return;
+    const ld=document.createElement('div');ld.className='ai-loading';ld.textContent='⚡ Gerando explicacao...';$.appendChild(ld);return;
   }
-
   if(aiResult){
     const box=document.createElement('div');box.className='ai-card';
-    box.innerHTML=`<div class="ai-card-title t-exp">&#9889; Explicacao IA</div><div class="ai-card-body">${aiResult}</div>`;
+    box.innerHTML=`<div class="ai-card-title">⚡ Explicacao IA</div><div>${aiResult}</div>`;
     $.appendChild(box);
-    const rb=document.createElement('button');rb.className='explain-btn';rb.textContent='Perguntar de novo';
-    rb.onclick=callExplain;$.appendChild(rb);
-  }else{
-    const eb=document.createElement('button');eb.className='explain-btn';
-    eb.innerHTML='&#9889; Explicar com IA';
-    eb.onclick=callExplain;$.appendChild(eb);
   }
+  const eb=document.createElement('button');eb.className='explain-btn';eb.disabled=aiLoading;
+  eb.textContent=aiResult?'Perguntar de novo':'⚡ Explicar com IA';
+  eb.onclick=callExplain;$.appendChild(eb);
 }
-
-function advance(){idx++;if(idx>=cards.length){done=true;saveProgress();render();return;}mode=idx%2===0?'flip':'quiz';render();}
 
 function renderDone($){
-  const pct=Math.round(score.ok/cards.length*100);
-  const e=pct>=80?'&#127919;':pct>=60?'&#128200;':'&#128170;';
-  const m=pct>=80?'Excelente!':pct>=60?'Bom progresso!':'Continue estudando!';
-  $.innerHTML=`<div class="done"><div class="done-icon">${e}</div><div class="done-t">${m}</div>
-    <div class="done-s">Acertou ${score.ok} de ${cards.length} (${pct}%)</div>
-    <div class="stats" style="max-width:260px;margin:0 auto 1rem;">
-      <div class="st st-ok"><div class="st-n">${score.ok}</div><div class="st-l">Acertos</div></div>
-      <div class="st st-err"><div class="st-n">${score.err}</div><div class="st-l">Erros</div></div>
-    </div>
-    <div class="acts" style="max-width:280px;margin:0 auto;"><button class="btn btn-p" id="bR">Refazer</button></div></div>`;
-  document.getElementById('bR').onclick=resetGame;
-}
-
-async function saveProgress(){
-  if(!currentUser)return;
-  try{
-    await setDoc(doc(db,'progress',currentUser.uid),{
-      displayName:currentUser.displayName,email:currentUser.email,
-      correct:score.ok,wrong:score.err,total:cards.length,
-      pct:Math.round(score.ok/cards.length*100),streak,
-      ts:new Date().toISOString()
-    },{merge:true});
-  }catch(e){console.warn('Firestore:',e);}
+  const cnt=countCards();const total=sessionStats.ok+sessionStats.err;
+  const pct=total?Math.round(sessionStats.ok/total*100):0;
+  $.innerHTML=`
+    <div class="user-bar"><img src="${currentUser.photoURL||''}" alt="" referrerpolicy="no-referrer"/><span>${currentUser.displayName||''}</span><button id="lo2">Sair</button></div>
+    <div class="done">
+      <div class="done-icon">${queue.length===0?'&#128564;':'&#127919;'}</div>
+      <div class="done-t">${queue.length===0?'Nenhum card para revisar!':total?`${pct}% de acerto`:'Sessao concluida!'}</div>
+      <div class="done-s">${queue.length===0?'Volte mais tarde — a repeticao espacada esta trabalhando por voce.':`Acertou ${sessionStats.ok} de ${total} cards`}<br>
+        Pendentes: ${cnt.nw} novos, ${cnt.learn} aprendendo, ${cnt.rev} revisao</div>
+      <div class="acts" style="max-width:320px;margin:0 auto;">
+        <button class="btn btn-p" id="bR">${queue.length===0?'Estudar todos':'Revisar de novo'}</button>
+      </div>
+    </div>`;
+  document.getElementById('lo2').onclick=()=>signOut(auth);
+  document.getElementById('bR').onclick=()=>{
+    if(queue.length===0){
+      // Reset: study all cards as new session
+      queue=CARDS.map(c=>c.id);
+    }
+    qIdx=0;sessionStats={ok:0,err:0};revealed=false;quizAnswered=false;quizSel=null;aiResult=null;render();
+  };
 }
 </script>
 </body>
