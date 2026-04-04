@@ -119,6 +119,13 @@ body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f5f5f
 .btn{flex:1;padding:.85rem 1rem;border-radius:var(--r);border:.5px solid var(--bd2);background:transparent;font-size:16px;color:var(--tx1);cursor:pointer;font-weight:600;font-family:inherit;}
 .btn:active{background:var(--bg2);}
 .btn-p{background:var(--tx1);color:var(--bg1);border-color:var(--tx1);}
+
+/* Deck filter bar */
+.deck-bar{display:flex;gap:6px;overflow-x:auto;padding:.5rem 0;margin-bottom:.75rem;-webkit-overflow-scrolling:touch;}
+.deck-bar::-webkit-scrollbar{display:none;}
+.deck-chip{white-space:nowrap;padding:6px 14px;border-radius:99px;border:1px solid var(--bd2);background:var(--bg1);font-size:13px;font-weight:500;color:var(--tx2);cursor:pointer;font-family:inherit;flex-shrink:0;}
+.deck-chip.active{background:var(--tx1);color:var(--bg1);border-color:var(--tx1);}
+.deck-chip .deck-count{font-size:11px;opacity:.7;margin-left:4px;}
 </style>
 </head>
 <body>
@@ -138,16 +145,16 @@ let currentUser=null;
 // CARDS
 // ══════════════════════════════════════════════
 const CARDS=[
-  {id:"c01",tag:"Valvula tricuspide — cortes 2D",diff:"hard",question:"Em quais cortes a cuspide POSTERIOR da tricuspide e visualizada?",answer:"Bicaval modificado (ETE) e paraesternal via de entrada do VD posteriorizado",detail:"A cuspide posterior so aparece em cortes posteriorizados. No apical 4C padrao e subcostal convencional, veem-se apenas septal e anterior.",diagram:"tricuspide",options:["Apical 4C e subcostal 4C","Paraesternal eixo curto e subcostal 5C","Bicaval modificado (ETE) e paraesternal via de entrada VD posteriorizado","Apical 4C e paraesternal eixo longo VE"],correct:2},
-  {id:"c02",tag:"Corte supraesternal",diff:"medium",question:"No corte supraesternal com index a 3h, qual estrutura e o numero 2?",answer:"Arteria pulmonar direita",detail:"Sequencia: 1=aorta transversa, 2=arteria pulmonar direita, 3=veia pulmonar superior direita, 4=veia pulmonar inferior esquerda.",diagram:"supraesternal",options:["Arteria pulmonar esquerda","Veia cava superior","Arteria pulmonar direita","Aorta ascendente"],correct:2},
-  {id:"c03",tag:"Segmentacao do VE",diff:"medium",question:"Qual modelo e padrao para perfusao miocardica e por que?",answer:"17 segmentos — uniformiza com RNM e cintilografia. O 18 segmentos e usado para strain (GLS).",detail:"O apex (seg. 17) nao tem vascularizacao coronaria definida, por isso e incluido na contratilidade mas excluido da perfusao nos modelos de cintilografia.",diagram:"segmentacao",options:["16 segmentos — padrao historico ASE","17 segmentos — uniformiza com RNM e cintilografia","18 segmentos — maior precisao de strain","20 segmentos — mais detalhado"],correct:1},
-  {id:"c04",tag:"Seio venoso coronario",diff:"hard",question:"Em quais janelas transtoracicas o seio venoso coronario e identificado?",answer:"Paraesternal eixo longo VE, apical 2 camaras e apical 4 camaras posteriorizado",detail:"O seio venoso drena no AD (nao AE). Passa no sulco AV posterior ao anel mitral. Quando dilatado (ex.: ablacao, CRTD), fica mais evidente.",diagram:"seio_venoso",options:["Apical 4C, subcostal e paraesternal eixo curto","Paraesternal eixo longo VE, apical 2C e apical 4C posteriorizado","Supraesternal, bicaval e subcostal 5C","Via de entrada VD, apical 3C e subcostal"],correct:1},
-  {id:"c05",tag:"VCI — Pressao do AD",diff:"easy",question:"VCI=8mm ao final da expiracao, colapsabilidade >50%. PAD estimada e local de medicao?",answer:"PAD = 3 mmHg. Medir imediatamente abaixo da veia hepatica (0,5-3cm antes do AD)",detail:"Tabela: VCI<21+colapso>50% = 3mmHg; VCI<21+colapso<50% = 8mmHg; VCI>21+colapso>50% = 8mmHg; VCI>21+colapso<50% = 15mmHg.",diagram:"vci",options:["PAD=8mmHg, medir na desembocadura no AD","PAD=15mmHg, medir abaixo da veia hepatica","PAD=5mmHg, porcao distal da VCI","PAD=3mmHg, abaixo da veia hepatica"],correct:3},
-  {id:"c06",tag:"FEVE — Foreshortening",diff:"medium",question:"O que acontece com a FEVE no Simpson quando ha foreshortening (apical trucado)?",answer:"Superestima — VDF calculado e menor (denominador menor), elevando artificialmente a FEVE",detail:"FEVE=(VDF-VSF)/VDF. Apical trucado -> VDF subestimado -> denominador menor -> FEVE maior que a real.",diagram:"feve",options:["Subestima — excursao apical reduzida","Nao interfere — Simpson e robusto","Superestima — VDF menor eleva artificialmente a FEVE","Subestima — VSF fica artificialmente elevado"],correct:2},
-  {id:"c07",tag:"FEVE — Insuficiencia Mitral",diff:"medium",question:"Por que a FEVE superestima a funcao sistolica na IM importante?",answer:"O volume regurgitante e computado como parte do stroke volume total, inflando o numerador",detail:"SV total = SV real (VSVE) + Vol. Regurgitante. O VR escapa para o AE durante a sistole mas e contado na FEVE como se fosse ejecao efetiva.",diagram:"feve",options:["Pos-carga reduzida aumenta VDF","Volume regurgitante infla o stroke volume total","IM subestima FEVE por reduzir enchimento","FEVE nao e afetada pela IM"],correct:1},
-  {id:"c08",tag:"Parede anterior do VD",diff:"easy",question:"A parede ANTERIOR do VD e vista em quais planos?",answer:"Paraesternal via de entrada VD + paraesternal eixo curto (vasos da base) + paraesternal eixo longo VE",detail:"No apical 4C e subcostal ve-se a parede lateral/livre e septal. A parede anterior so aparece nos cortes paraesternais.",diagram:"vd",options:["Apical 4C, apical VD focado e subcostal","Paraesternal via de entrada VD, eixo curto vasos da base e eixo longo VE","Subcostal, supraesternal e apical 2C","Paraesternal eixo longo VE, apical 4C e subcostal"],correct:1},
-  {id:"c09",tag:"Medidas da aorta",diff:"medium",question:"Em adultos, o anel aortico: quando medir e qual metodologia?",answer:"Mesossistole (antes da onda T) + inner-inner. As demais medidas da aorta: telediastole + leading edge-leading edge.",detail:"Essa padronizacao vale para todas as faixas etarias. O anel na sistole porque a aorta esta maximamente aberta. Seios de Valsalva e alem: diastolico.",diagram:"aorta",options:["Telediastole, leading edge-leading edge","Mesossistole, leading edge-leading edge","Mesossistole, inner-inner","Telediastole, inner-inner"],correct:2},
-  {id:"c10",tag:"Crista terminalis",diff:"easy",question:"O que e a crista terminalis e como diferencia-la da Valvula de Eustaquio e Rede de Chiari?",answer:"Proeminencia fibromuscular em C no AD (VCS->VCI pela parede lateral). Eustaquio: borda da VCI. Chiari: membranosa, fenestrada, associada a FOP.",detail:"A crista terminalis e uma estrutura solida, fibromuscular. Nao confundir com massas ou tumores — e uma variante normal e pode ser proeminente.",diagram:"ad",options:["Remanescente embriologico na borda da VCI","Membrana fenestrada associada a FOP","Proeminencia fibromuscular em C no AD da VCS ate VCI","Musculo papilar acessorio do VD"],correct:2}
+  {id:"c01",tag:"Valvula tricuspide — cortes 2D",diff:"hard",deck:"Eco::Anatomia::Tricuspide",tags:["valvopatia","tricuspide","cortes-2d","ete"],question:"Em quais cortes a cuspide POSTERIOR da tricuspide e visualizada?",answer:"Bicaval modificado (ETE) e paraesternal via de entrada do VD posteriorizado",detail:"A cuspide posterior so aparece em cortes posteriorizados. No apical 4C padrao e subcostal convencional, veem-se apenas septal e anterior.",diagram:"tricuspide",options:["Apical 4C e subcostal 4C","Paraesternal eixo curto e subcostal 5C","Bicaval modificado (ETE) e paraesternal via de entrada VD posteriorizado","Apical 4C e paraesternal eixo longo VE"],correct:2},
+  {id:"c02",tag:"Corte supraesternal",diff:"medium",deck:"Eco::Anatomia::Supraesternal",tags:["aorta","supraesternal","anatomia"],question:"No corte supraesternal com index a 3h, qual estrutura e o numero 2?",answer:"Arteria pulmonar direita",detail:"Sequencia: 1=aorta transversa, 2=arteria pulmonar direita, 3=veia pulmonar superior direita, 4=veia pulmonar inferior esquerda.",diagram:"supraesternal",options:["Arteria pulmonar esquerda","Veia cava superior","Arteria pulmonar direita","Aorta ascendente"],correct:2},
+  {id:"c03",tag:"Segmentacao do VE",diff:"medium",deck:"Eco::Funcao::Segmentacao",tags:["segmentacao","strain","gls"],question:"Qual modelo e padrao para perfusao miocardica e por que?",answer:"17 segmentos — uniformiza com RNM e cintilografia. O 18 segmentos e usado para strain (GLS).",detail:"O apex (seg. 17) nao tem vascularizacao coronaria definida, por isso e incluido na contratilidade mas excluido da perfusao nos modelos de cintilografia.",diagram:"segmentacao",options:["16 segmentos — padrao historico ASE","17 segmentos — uniformiza com RNM e cintilografia","18 segmentos — maior precisao de strain","20 segmentos — mais detalhado"],correct:1},
+  {id:"c04",tag:"Seio venoso coronario",diff:"hard",deck:"Eco::Anatomia::Seio Venoso",tags:["seio-venoso","coronario","sulco-av"],question:"Em quais janelas transtoracicas o seio venoso coronario e identificado?",answer:"Paraesternal eixo longo VE, apical 2 camaras e apical 4 camaras posteriorizado",detail:"O seio venoso drena no AD (nao AE). Passa no sulco AV posterior ao anel mitral. Quando dilatado (ex.: ablacao, CRTD), fica mais evidente.",diagram:"seio_venoso",options:["Apical 4C, subcostal e paraesternal eixo curto","Paraesternal eixo longo VE, apical 2C e apical 4C posteriorizado","Supraesternal, bicaval e subcostal 5C","Via de entrada VD, apical 3C e subcostal"],correct:1},
+  {id:"c05",tag:"VCI — Pressao do AD",diff:"easy",deck:"Eco::Hemodinamica::VCI",tags:["vci","pressao-ad","hemodinamica"],question:"VCI=8mm ao final da expiracao, colapsabilidade >50%. PAD estimada e local de medicao?",answer:"PAD = 3 mmHg. Medir imediatamente abaixo da veia hepatica (0,5-3cm antes do AD)",detail:"Tabela: VCI<21+colapso>50% = 3mmHg; VCI<21+colapso<50% = 8mmHg; VCI>21+colapso>50% = 8mmHg; VCI>21+colapso<50% = 15mmHg.",diagram:"vci",options:["PAD=8mmHg, medir na desembocadura no AD","PAD=15mmHg, medir abaixo da veia hepatica","PAD=5mmHg, porcao distal da VCI","PAD=3mmHg, abaixo da veia hepatica"],correct:3},
+  {id:"c06",tag:"FEVE — Foreshortening",diff:"medium",deck:"Eco::Funcao::FEVE",tags:["feve","simpson","foreshortening"],question:"O que acontece com a FEVE no Simpson quando ha foreshortening (apical trucado)?",answer:"Superestima — VDF calculado e menor (denominador menor), elevando artificialmente a FEVE",detail:"FEVE=(VDF-VSF)/VDF. Apical trucado -> VDF subestimado -> denominador menor -> FEVE maior que a real.",diagram:"feve",options:["Subestima — excursao apical reduzida","Nao interfere — Simpson e robusto","Superestima — VDF menor eleva artificialmente a FEVE","Subestima — VSF fica artificialmente elevado"],correct:2},
+  {id:"c07",tag:"FEVE — Insuficiencia Mitral",diff:"medium",deck:"Eco::Funcao::FEVE",tags:["feve","insuficiencia-mitral","regurgitacao"],question:"Por que a FEVE superestima a funcao sistolica na IM importante?",answer:"O volume regurgitante e computado como parte do stroke volume total, inflando o numerador",detail:"SV total = SV real (VSVE) + Vol. Regurgitante. O VR escapa para o AE durante a sistole mas e contado na FEVE como se fosse ejecao efetiva.",diagram:"feve",options:["Pos-carga reduzida aumenta VDF","Volume regurgitante infla o stroke volume total","IM subestima FEVE por reduzir enchimento","FEVE nao e afetada pela IM"],correct:1},
+  {id:"c08",tag:"Parede anterior do VD",diff:"easy",deck:"Eco::Anatomia::VD",tags:["vd","parede-anterior","paraesternal"],question:"A parede ANTERIOR do VD e vista em quais planos?",answer:"Paraesternal via de entrada VD + paraesternal eixo curto (vasos da base) + paraesternal eixo longo VE",detail:"No apical 4C e subcostal ve-se a parede lateral/livre e septal. A parede anterior so aparece nos cortes paraesternais.",diagram:"vd",options:["Apical 4C, apical VD focado e subcostal","Paraesternal via de entrada VD, eixo curto vasos da base e eixo longo VE","Subcostal, supraesternal e apical 2C","Paraesternal eixo longo VE, apical 4C e subcostal"],correct:1},
+  {id:"c09",tag:"Medidas da aorta",diff:"medium",deck:"Eco::Medidas::Aorta",tags:["aorta","anel-aortico","medidas"],question:"Em adultos, o anel aortico: quando medir e qual metodologia?",answer:"Mesossistole (antes da onda T) + inner-inner. As demais medidas da aorta: telediastole + leading edge-leading edge.",detail:"Essa padronizacao vale para todas as faixas etarias. O anel na sistole porque a aorta esta maximamente aberta. Seios de Valsalva e alem: diastolico.",diagram:"aorta",options:["Telediastole, leading edge-leading edge","Mesossistole, leading edge-leading edge","Mesossistole, inner-inner","Telediastole, inner-inner"],correct:2},
+  {id:"c10",tag:"Crista terminalis",diff:"easy",deck:"Eco::Anatomia::AD",tags:["crista-terminalis","eustaquio","chiari","variante-normal"],question:"O que e a crista terminalis e como diferencia-la da Valvula de Eustaquio e Rede de Chiari?",answer:"Proeminencia fibromuscular em C no AD (VCS->VCI pela parede lateral). Eustaquio: borda da VCI. Chiari: membranosa, fenestrada, associada a FOP.",detail:"A crista terminalis e uma estrutura solida, fibromuscular. Nao confundir com massas ou tumores — e uma variante normal e pode ser proeminente.",diagram:"ad",options:["Remanescente embriologico na borda da VCI","Membrana fenestrada associada a FOP","Proeminencia fibromuscular em C no AD da VCS ate VCI","Musculo papilar acessorio do VD"],correct:2}
 ];
 
 // ══════════════════════════════════════════════
@@ -167,44 +174,85 @@ const DG={
 function svg(k){const fn=DG[k];return fn?`<div class="diag">${fn(300,90)}</div>`:''}
 
 // ══════════════════════════════════════════════
-// SRS ENGINE (Anki SM-2 algorithm)
+// SRS ENGINE (FSRS — Free Spaced Repetition Scheduler)
 // ══════════════════════════════════════════════
-const SRS_DEFAULT={state:'new',interval:0,ease:2.5,due:0,reviews:0,lapses:0};
+const SRS_DEFAULT={state:'new',stability:0,difficulty:0,due:0,reviews:0,lapses:0,lastReview:0};
+
+const W=[0.4,0.6,2.4,5.8,4.93,0.94,0.86,0.01,1.49,0.14,0.94,2.18,0.05,0.34,1.26,0.29,2.61];
+const DESIRED_R=0.9;
+const DECAY=-0.5;
+const FACTOR=19/81;
+
+function clamp(v,lo,hi){return Math.min(Math.max(v,lo),hi);}
+
+function fsrsInitD(rating){
+  return clamp(W[4]-Math.exp(W[5]*(rating-1))+1,1,10);
+}
+
+function fsrsRetrievability(t,S){
+  if(S<=0)return 0;
+  return Math.pow(1+FACTOR*t/S,DECAY);
+}
+
+function fsrsNextInterval(S){
+  if(S<=0)return 0;
+  const ivl=(S/FACTOR)*(Math.pow(DESIRED_R,1/DECAY)-1);
+  return Math.max(ivl,1/1440); // min 1 minute in days
+}
 
 function srsCalc(srs,rating){
   // rating: 1=Again, 2=Hard, 3=Good, 4=Easy
   const now=Date.now();
-  let{interval,ease,reviews,lapses}=srs;
-  let newInterval,newEase=ease;
+  let{stability:S,difficulty:D,reviews,lapses,lastReview}=srs;
+  let newS,newD,newState,newLapses=lapses;
 
-  if(rating===1){ // Again
-    newInterval=1/1440; // 1 minute (in days)
-    newEase=Math.max(ease-0.2,1.3);
-    lapses++;
-  }else if(rating===2){ // Hard
-    newInterval=interval<1?6/1440:Math.max(interval*1.2,1); // 6min or *1.2
-    newEase=Math.max(ease-0.15,1.3);
-  }else if(rating===3){ // Good
-    if(interval<1) newInterval=10/1440; // 10min
-    else if(reviews<2) newInterval=1; // 1 day
-    else newInterval=Math.round(interval*ease);
-  }else{ // Easy
-    if(interval<1) newInterval=4; // 4 days
-    else newInterval=Math.round(interval*ease*1.3);
-    newEase=ease+0.15;
+  if(srs.state==='new'||reviews===0){
+    // First review — initial stability & difficulty
+    newS=[W[0],W[1],W[2],W[3]][rating-1];
+    newD=fsrsInitD(rating);
+    newState=rating===1?'learning':'review';
+    if(rating===1)newLapses++;
+  }else{
+    // Elapsed days since last review
+    const elapsed=lastReview>0?((now-lastReview)/86400000):0;
+    const R=fsrsRetrievability(elapsed,S);
+
+    if(rating===1){
+      // Failed — Again
+      newS=W[11]*Math.pow(D,-W[12])*(Math.pow(S+1,W[13])-1)*Math.exp(W[14]*(1-R));
+      newS=Math.max(newS,0.1);
+      newLapses++;
+      newState='relearning';
+    }else{
+      // Success — Hard/Good/Easy
+      newS=S*(1+Math.exp(W[8])*(11-D)*Math.pow(S,-W[9])*(Math.exp(W[10]*(1-R))-1));
+      newS=Math.max(newS,0.1);
+      // Hard penalty / Easy bonus
+      if(rating===2)newS=newS*0.85;
+      else if(rating===4)newS=newS*1.15;
+      newState='review';
+    }
+
+    // Difficulty update
+    const D0_3=fsrsInitD(3);
+    newD=D-W[6]*(rating-3);
+    newD=W[7]*D0_3+(1-W[7])*newD;
+    newD=clamp(newD,1,10);
   }
 
-  // Cap at 365 days
-  if(newInterval>365) newInterval=365;
+  // Cap stability at 365 (max interval ~365d)
+  if(newS>365)newS=365;
 
-  const dueMs=now+newInterval*86400000;
-  return{state:rating===1?'relearning':'review',interval:newInterval,ease:newEase,due:dueMs,reviews:reviews+1,lapses};
+  const interval=fsrsNextInterval(newS);
+  const dueMs=now+interval*86400000;
+
+  return{state:newState,stability:newS,difficulty:newD,due:dueMs,reviews:reviews+1,lapses:newLapses,lastReview:now};
 }
 
 function intervalLabel(srs,rating){
   const r=srsCalc(srs,rating);
-  const d=r.interval;
-  if(d<1/60) return '<1m';
+  const d=fsrsNextInterval(r.stability);
+  if(d<1/1440) return '<1m';
   if(d<1/24) return Math.round(d*1440)+'m';
   if(d<1) return Math.round(d*24)+'h';
   if(d<30) return Math.round(d)+'d';
@@ -224,6 +272,23 @@ let quizSel=null;
 let aiLoading=false;
 let aiResult=null;
 let sessionStats={ok:0,err:0};
+let activeDeck=null;// null = all decks
+
+// Deck helpers — extract 2nd level from "Eco::Anatomia::Tricuspide" => "Anatomia"
+function getDeckL2(card){
+  if(!card.deck)return 'Outros';
+  const parts=card.deck.split('::');
+  return parts.length>=2?parts[1]:'Outros';
+}
+function getDeckCounts(){
+  const counts={};
+  CARDS.forEach(c=>{const d=getDeckL2(c);counts[d]=(counts[d]||0)+1;});
+  return counts;
+}
+function filteredCards(){
+  if(!activeDeck)return CARDS;
+  return CARDS.filter(c=>getDeckL2(c)===activeDeck);
+}
 
 // ══════════════════════════════════════════════
 // FIRESTORE SRS SYNC
@@ -248,9 +313,10 @@ async function saveSRS(cardId,data){
 function buildQueue(){
   const now=Date.now();
   const due=[];const newCards=[];
-  CARDS.forEach(c=>{
+  const pool=filteredCards();
+  pool.forEach(c=>{
     const s=srsData[c.id]||{...SRS_DEFAULT};
-    if(s.state==='new') newCards.push(c.id);
+    if(s.state==='new'||s.reviews===0) newCards.push(c.id);
     else if(s.due<=now) due.push(c.id);
   });
   // Overdue first (sorted by oldest due), then new cards
@@ -262,10 +328,11 @@ function buildQueue(){
 
 function countCards(){
   const now=Date.now();let nw=0,learn=0,rev=0;
-  CARDS.forEach(c=>{
+  const pool=filteredCards();
+  pool.forEach(c=>{
     const s=srsData[c.id]||{...SRS_DEFAULT};
-    if(s.state==='new')nw++;
-    else if(s.state==='relearning'||(s.state==='review'&&s.interval<1&&s.due<=now))learn++;
+    if(s.state==='new'||s.reviews===0)nw++;
+    else if(s.state==='relearning'||s.state==='learning')learn++;
     else if(s.due<=now)rev++;
   });
   return{nw,learn,rev};
@@ -337,15 +404,30 @@ function render(){
   const pips=di.c==='easy'?1:di.c==='medium'?2:3;
   const isQuiz=qIdx%2!==0;
 
+  const deckCounts=getDeckCounts();
+  const deckNames=Object.keys(deckCounts).sort();
+  const totalCards=CARDS.length;
+  let deckChips=`<button class="deck-chip${activeDeck===null?' active':''}" data-deck="__all__">Todos<span class="deck-count">${totalCards}</span></button>`;
+  deckNames.forEach(dk=>{deckChips+=`<button class="deck-chip${activeDeck===dk?' active':''}" data-deck="${dk}">${dk}<span class="deck-count">${deckCounts[dk]}</span></button>`;});
+
   $.innerHTML=`
     <div class="user-bar"><img src="${currentUser.photoURL||''}" alt="" referrerpolicy="no-referrer"/><span>${currentUser.displayName||''}</span><button id="lo">Sair</button></div>
     <div class="hdr">
       <div class="hdr-title"><span>FM</span>Anki DIC</div>
       <div class="counts"><span class="cnt-new">${cnt.nw} novos</span><span class="cnt-learn">${cnt.learn} aprend.</span><span class="cnt-rev">${cnt.rev} revis.</span></div>
     </div>
+    <div class="deck-bar" id="deckBar">${deckChips}</div>
     <div class="pb-w"><div class="pb" style="width:${pct}%"></div></div>
     <div class="meta">${Array(pips).fill(`<div class="pip ${di.p}"></div>`).join('')}<span class="diff ${di.c}">${di.l}</span><span class="mode-pill">${isQuiz?'Quiz':'Flip'}</span></div>`;
   document.getElementById('lo').onclick=()=>signOut(auth);
+  // Deck chip click handlers
+  document.querySelectorAll('.deck-chip').forEach(chip=>{
+    chip.onclick=()=>{
+      const dk=chip.getAttribute('data-deck');
+      activeDeck=dk==='__all__'?null:dk;
+      buildQueue();render();
+    };
+  });
 
   if(isQuiz) renderQuiz($,card,srs);
   else renderFlip($,card,srs);
@@ -434,8 +516,8 @@ function renderDone($){
   document.getElementById('lo2').onclick=()=>signOut(auth);
   document.getElementById('bR').onclick=()=>{
     if(queue.length===0){
-      // Reset: study all cards as new session
-      queue=CARDS.map(c=>c.id);
+      // Reset: study all cards (filtered) as new session
+      queue=filteredCards().map(c=>c.id);
     }
     qIdx=0;sessionStats={ok:0,err:0};revealed=false;quizAnswered=false;quizSel=null;aiResult=null;render();
   };
